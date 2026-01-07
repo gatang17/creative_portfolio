@@ -351,7 +351,7 @@ titles.forEach(title => observer.observe(title));
 
 
 // ================= GRID GALLERY =================
-fetch('js/data/projects.json')
+fetch('./js/data/projects.json')
  
 .then(res => res.json())
 .then(data => {
