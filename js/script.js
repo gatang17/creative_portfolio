@@ -10,7 +10,7 @@ const menuState = { open: false, updateUI: null };
 
 document.addEventListener("DOMContentLoaded", () => {
   // Load header HTML dynamically
-  fetch("js/data/header.html")
+  fetch("./js/data/header.html")
     .then(res => res.text())
     .then(html => {
       document.getElementById("header").innerHTML = html;
