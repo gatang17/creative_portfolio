@@ -1,684 +1,484 @@
-
-a{
-    padding-top: 1rem;
-    font-family: 'Courier New', Courier, monospace;
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
-.my_container1 , .my_container{
-    width: 100%;
-    height: auto;
-    margin-bottom: 2rem;
+body {
+
+  font-family: 'Roboto', sans-serif;
+  background-color:#dadada;
 }
-.sec_logo {
-    height:  80vh;
-    width: 100%;
-    background-image: url('../images/logo.png');
-    background-size: contain;
-    background-repeat: no-repeat;
+/*menu hamburguer icon*/
+.fas{
+  color: #252525;
+}
+
+
+#section1{
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
   }
 
-  .sec_logoP{
-    height:  10vh;
-    width: 100%;
-    background-image: url('../images/logo2.png');
-    background-size: contain;
-    background-repeat: no-repeat;
-  }
-
-  .container_logo {
-    display: flex;
-  flex-flow: row;
-    
-  }
-
-.p_info{
-   
-    margin-bottom: -0.1em;
-    font-size: 1rem;
-    text-align: center;
-    
-}
-.lnk_gallery{
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-    line-height: 2;
-    text-decoration: none;
-    color: white;
+#section2{ 
+  background-color: #252525;
+  height: 100vh;
+  position: relative;
 }
 
-.cont_lnk_gallery{
-    background-color: #90720d;
-    height: auto;
-    margin: 1rem;;
-}
-
-.div_menu_home {
-    border-right: 2px solid black; /* o el color que prefieras */
-  }
-
-
-.navbar , .navbar-toggler {
-    border: transparent;
-}
-
-.btn_drop{
-    background-color: aqua;
-    margin-left: rem;
-}
-
-.btn_menu{
-    background-image: url(../images/btn_menu1.png);
-    
-}
-body{
-padding: 2rem;
-
-
-}
-
-.btn_menu2{
-    background-image: url(../images/btn_menu2.png);
-    
-}
-
-.cont_line2{
-    position: relative;
-    height: 2px; 
-   margin-bottom: 10rem;
-   margin-top: 1rem;
-   }  
-
-   h1, h2, h3, ul {
-    font-family: 'Courier New', Courier, monospace;
-   }
-h1{
-   
-    font-weight: bolder;
-}
-
-details, summary{
-    font-family: 'Courier New', Courier, monospace;
-    overflow-wrap: break-word;
-    word-break: keep-all;
-    hyphens: none;
-    font-weight: bolder;
-    
-}
-
-p{
-    
-    font-family: 'Courier New', Courier, monospace;
-    font-weight: bolder;
-    line-height: 2;
-    overflow-wrap: break-word;
-    word-break: keep-all;
-    hyphens: none;
-    }
-
-    .p_v, .p_h, .p_h_m, .p_h2{ 
-        /*solo PARA MENUs*/
-        font-size: 1rem;
-        margin-bottom: 2em;
-        font-weight: 700;
-        
-        }
-
+#section3{ 
+  padding-bottom: 10%;
+  background-color: #252525;
+  height: 100vh;
   
-
-/*HOVER PARA MENU*/
-.p_h:hover,
-.p_v:hover,
-.p_h2:hover,
-.p_h_m:hover {
-    transform: scale(1.05);
-    text-decoration: underline; /* Solo se subraya al pasar el mouse */
-}
-.p_h, .p_v , .p_h , .p_h_m, .p_h2{
-    text-decoration: none; /* Quita el subrayado por defecto */
-    transition: transform 0.3s ease, text-decoration 0.3s ease;
-  }
-
-
-.cont_lnk_gallery:hover{    
-    transform: scale(1.05);
-    text-decoration: underline;
-    
 }
 
- /*HOVER PARA MENU FIN*/
- .p_h2{
-    color: black;
+#section1Text {
+  text-align: left;
+  display: inline-block; /* para que los spans se alineen como un bloque centrado */
+  font-weight: 700; 
+  font-size: clamp(4rem, 15vw, 8rem);
+  padding: 2rem;
+}
+
+/* ******** text effects*/
+a {
+  text-decoration: none ;
+  color:#252525;;/* cambia a blanco */
+  text-transform: uppercase;
+  margin-inline: 1rem;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.05em!important;
+  transition: color 0.3s, transform 0.3s; /* solo cambia color y movimiento */
  }
-  
-    
-    .p_h,
-    .p_h_m{   /*menu Horizontal*/
-        color: #ffff;
-        text-align: center;
-        display: block;
-    }
 
-.p_v { /*menu vertical*/
-    display: inline-block;
-     }
-  
-     .sec_menu, .sec_menu2{
-        padding-top: 5em;
-        text-align: right;       
-        text-align: right;
-        align-content:baseline;
-    }
-
-
-.offcanvas{
-background-color: black;
-opacity: 80%;
-padding: 20px;
+ .lnkMenu {
+  position: relative; /* necesario para ::before */
+  text-decoration: none;
+  color: #ffffff!important;
+  text-transform: uppercase;
+  margin-inline: 1rem;
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.05em !important;
+  transition: color 0.3s, transform 0.3s;
 }
 
-.img_logoH{
-width: 150px;
-margin-bottom: 2rem; 
-    
+a:hover {
+  transform: scale(1.1);
+  color: #fff; /* opcional: cambia color al hacer hover */
 }
 
-
-
-.img_line{
-    height:100vh ;
-    margin-top: 1em;
-    margin: 1em;  
+a::before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 5px;
+  transform: scaleX(0);
+  transition: transform 0.5s ease; /* mejor solo animar transform */
+  bottom: 0;
+  left: 0;
+  transform-origin: left; /* importante para que crezca desde la izquierda */
 }
 
-@keyframes revelarDeDerecha {
-   0% {
-      clip-path: inset(0 0 0 100%); /* tapa todo desde la derecha */
-      opacity: 1;
-    }
+a:hover::before{
+  transform: scaleX(1);
+}
+ 
+h1 {
+  font-family: "Oswald", sans-serif;
+  color: #252525;;
 
-    100% {
-      clip-path: inset(0 0 0 0);    /* revela completamente */
-      opacity: 1;
-    }
-  }
-  
-  #link_logoV {
-    animation: revelarDeDerecha 1s ease-out forwards;
-  }
-  
+  font-style: normal;
+  text-transform: uppercase;
+ //*margin: clamp(3rem, 5vw, 8rem)!important; /* mínimo 3rem, escala con 5% del viewport, máximo 8rem */
+ 
+}
 
-
-/*Efecto de bounce*/
-
-.imagen-saltito:hover{
-transform: scale(1.05);
+  h2{
+  font-family: "Oswald", sans-serif;
+   font-weight: 500;   
+   font-size: clamp(2rem, 6vw, 4rem);
+   color: #252525;;
+   text-transform: uppercase;
   }
 
-.imagen-saltito {
-        animation: saltito 2s ease-out;
-        animation-delay: 0.5s;
-        width: 50vw;
-
-      }
-      
-      @keyframes saltito {
-        0% {
-            transform: scale(1);
-            opacity: 0;
-          }
-          50% {
-            transform: scale(1.05);
-            opacity: 1;
-          }
-          100% {
-            transform: scale(1);
-            opacity: 1;
-          }
+ h3{
+  padding-top: 5rem;
+   font-family: "Fira Sans Condensed", sans-serif;
+   font-weight: 600;
+   font-style: normal;
+   color:#ffffff8f!important;
+   overflow: hidden;
+   font-size: clamp(2rem, 5vw, 4rem);
+   text-transform: uppercase;
     
+   transition: letter-spacing 0.5s, color 0.5s, background 0.5s;
+ }
+
+ h4 {
+  font-size: clamp(1.2rem, 3.5vw, 2.5rem);
 }
-/**/
+
+.pHome {
+  padding-top: 10rem;
+  padding-right: 1rem;
+  position: absolute;
+  bottom: 20%;
+  left: 50%;
+
+  text-align: right;
+  max-width: 50%;          /* parte desde el centro */
+ z-index: 1;
+ 
+  overflow-wrap: normal;
+  word-break: normal;
+  text-align: right;
+  justify-content: end;
+ 
+}
 
 
-.sec_hero{
-    margin-left: 1REM;
+#pHome .word {
+  display: inline-block;
+  transition: color 0.5s ease;
+}
+
+#pHome .word.active {
+  color: #252525;;
+}
+
+
+ p{
+  font-family: "Nunito", sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.5rem); /* más legible en móviles */
+  font-style: normal;
+ color: #f9f9f9e1;
+ }
+
+
+
+#navbarMenu {
+  position: fixed;          /* siempre visible en la ventana */
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  /* centra vertical */
+  align-items: center;      /* centra horizontal */
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(8px);
+  z-index: 10;            /* encima de logo y botón */
+  visibility: hidden;
+}
+
+
+
+/* MOBILE FIRST --------------------------------------------*/
+
+#menu_hamburguer {
+  visibility: hidden;
+  justify-content: flex-end;
+}
+
+
+#foot_bar {
+  border-top: #ffffff8f solid;
+}
+#container_top, #foot_bar {
+  transition: background-color 0.4s ease;
+}
+
+
+footer {
+  position: fixed;
+  bottom: 0;         /* lo fija al borde inferior de la pantalla */
+  left: 0;
+  width: 100%;       /* ocupa todo el ancho */
+  padding-top: 10px;
+
+  background-color: transparent; /* usa transparent, no "none" */
+  z-index: 10000;     /* asegura que quede por encima de otros elementos */
+  padding-bottom: 10px;
+}
+
+
+
+@media (max-width: 768px) {
+  /* MOBILE FIRST --------------------------------------------*/
+
+
+#menu_hamburguer {
+  visibility: visible;
+}
+
+#navbarMenu {
+  visibility: hidden;
+}
+
+#div_menutop {
+  display: none;
+}
+
+#div_menubotom {
+  display: block;
+  
+}
+
+#foot_bar {
+  border-top: #ffffff8f solid;
+}
+
+/* ELEMENTOS BORROSOS POR DEFECTO */
+.borroso {
+  filter: none;
+}
+
+
+#divLogoIntro img {
+  max-width: 60%; /* se reduce para caber en pantalla */
+}
+#h1ContainerIntro {
+  margin-left: -10rem; /* ajusta posición en móvil */
+}
+
+}
+
+/*EFECTOS*/
+/* Pelota que rebota y hace blur al contenido debajo */
+.bouncing-ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: 9999;
+  border: 3px solid rgba(255, 255, 255, 0.6); /* color y grosor */
+
+  /* Fondo semitransparente para que se vea el blur */
+  background-color: rgba(255,255,255,0.1);
+
+  /* El truco: blur al contenido que está detrás */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  pointer-events: none; /* no bloquea clicks */
+
+
+}
+
+/* Rebote simple */
+/* Pelota 1 - esquina superior izquierda */
+@keyframes bounce1 {
+  0%   { transform: translate(0, 0); }           /* esquina izquierda-norte */
+  25%  { transform: translate(70vw, 20vh); }
+  50%  { transform: translate(60vw, 70vh); }
+  75%  { transform: translate(10vw, 60vh); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Pelota 2 - esquina inferior derecha */
+@keyframes bounce2 {
+  0%   { transform: translate(90vw, 90vh); }     /* esquina derecha-sur */
+  25%  { transform: translate(50vw, 70vh); }
+  50%  { transform: translate(60vw, 20vh); }
+  75%  { transform: translate(80vw, 60vh); }
+  100% { transform: translate(90vw, 90vh); }
+}
+
+/* Pelota 3 - esquina inferior izquierda */
+@keyframes bounce3 {
+  0%   { transform: translate(0, 90vh); }       /* esquina izquierda-sur */
+  25%  { transform: translate(30vw, 70vh); }
+  50%  { transform: translate(50vw, 20vh); }
+  75%  { transform: translate(10vw, 40vh); }
+  100% { transform: translate(0, 90vh); }
+}
+
+
+.ball1 { animation: bounce1 10s infinite linear; }
+.ball2 { animation: bounce2 12s infinite linear; }
+.ball3 { animation: bounce3 14s infinite linear; }
+
+.fade-in {
+  opacity: 0;
+ 
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.show {
+  opacity: 1;
+ 
+}
+/* Transición suave para todos los textos e iconos */
+h1, h2, h3, h4, h5, h6, p, a, span, i, button {
+  transition: color 0.4s ease;
+}
+
+/* fade-in inicial */
+
+/*****************SECTION3* PROJECTS************/
+
+
+#projectsGrid {
+  padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30%, 1fr));
+  gap: 20px;
+}
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1;
+}
+.project-card img {
+  width: 100%;
+  display: block;
+  transition: filter 0.3s, transform 0.3s;
+  filter: brightness(30%); /* filtrado inicial */
+}
+.project-card:hover img {
+  filter: none; /* al pasar el mouse se quita */
+}
+.project-card img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s, filter 0.3s;
+}
+/* efecto hover desktop: imagen se colorea y aparece tooltip */
+.project-card .tooltip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 15px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s, transform 0.3s;
+  font-size: 0.9em;
+  line-height: 1.3;
+}
+
+.project-card:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Móvil: mostrar de uno en uno */
+@media (max-width: 768px) {
+
+  #section3{ 
+
+    height: 100%!important;
+    
+  }
+  #projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card {
+    position: relative;
+    width: 100%;
+    height: 70vh; /* ocupa toda la altura de la pantalla */
+    overflow: hidden; /* recorta la imagen si es necesario */
+    padding: 1rem;
+  }
+
+  /* Imagen grande, recortada si es necesario */
+  .project-card img {
+    height: 100%;
+   
+    object-fit: cover; /* cubre toda la tarjeta sin deformar */
+    filter: none;      /* sin efectos de desktop */
+  }
+
+  /* Tooltip visible, con fondo gris, cubre la imagen */
+  .project-card .tooltip {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    background-blend-mode: multiply;
-    background-image: url(../images/hero.png);
-    background-position: center;
-    background-size: cover;
-
-}
-
-.hero_text{
-    position: absolute;
-    left: 60%;
-    top: 30%;
-    color: black;
-    background-color: rgba(255, 255, 255, 0.7); /* blanco con 70% de opacidad */
-    padding: 1rem;
-    border-radius: 10px;
+    background: rgba(0,0,0,0.3); /* gris semitransparente */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 0; /* oculta texto */
+    z-index: 1;   /* detrás del icono */
+    opacity: 1;
+    transform: none;
   }
 
-.cont_footer{
-    display: flex;
-}
-
-.container_foot{
-    background-color: black;
- 
-      
-}
-
-/*Pagina PROJECTS*/
-  
-.h1_title{
-    background-color: #90720d ;
-    color: #ffff;
-    text-align: center;
-    
-}
-
-.tb_img{
-  margin: 1rem;
-    height: auto;
-    width: auto;
-    z-index: 3;
-}
-
-.cont_descript { /*esto es para q el objeto see more este centrado en la imagen*/
-  position: relative;
-  display: inline-block;
-  text-align: center;
-}
-
-.p_hover { /*este es el texto*/
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  padding: 1px 1px;
-  border-radius: 3px;
-  font-weight: bold;
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none; /* evita que interrumpa el click */
-  z-index: 1; /*este hace q se ponga delante de todo*/
-  font-size: 2rem;
-}
-.tb_img:hover{ /*este hace q la imagen crezca*/
-    transform: scale(1.08) ;
-    opacity: 50%;
-  
-}
-
-.cont_descript:hover .p_hover{ /*esto hace q se haga visible*/
-  visibility: visible;
-  opacity: 1;
-}
-
-
-/*quill pen press page*/
-.cont_project{
-    margin-top: 2em;    
-}
-.sec_project{
-    justify-content: center;
-   }
-
-
-
-.img_project{
-    max-width: 30%;
-    
-}
-.cont_info {
-    width: 100%;
-   }
-
-
-  .cont_line{
-   
-    position: relative;
-    background-color: black;
-    height: 2px; /* ajusta como desees */
-    margin: 10px;
-
-   }
-
-
- .img_horizontal{
-  
-  width: 100%;
-  height: 100%;
-   
-   
-}
-
-.div_menu {
+  /* Ocultar texto interno y tooltip-icon */
+  .tooltip-text,
+  .tooltip-icon {
     display: none;
   }
 
-/*aboutme*/
-
-.cont_aca_hono{
-    padding: 1rem;
-}
-.menudrp{
-    visibility: hidden;
-
-}
-/*Photoshop*/
-
-.aged {
-    position: relative;
-     overflow: hidden;
-  }
-  
-  .aged-before,
-  .aged-after {
-    height: auto;
-    display: block;
-  }
-  
-  .reveal-wrapper {
+  /* Icono móvil encima del tooltip, centrado */
+  .mobile-icon {
+    display: block!important;   
     position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    animation: revelarDeDerecha 3s linear infinite;
-    will-change: clip-path;
-    z-index: 2;
+    top: 30%;            
+    left: 80%;           
+    transform: translate(-20%, -80%); /* centra el icono */
+    font-size: 2em;       /* ajusta al tamaño que quieras */
+    z-index: 100!important;         /* encima del tooltip */
+    pointer-events: auto; /* para que sea clicable */
+    color: inherit;       /* tu JS lo cambiará dinámicamente */
   }
 
-  .reveal-wrapper2 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    overflow: hidden;
-    animation: revelar2 6s linear infinite;
-    will-change: clip-path;
-    z-index: 3;
+  /* Imagen sin filtro ni transición */
+  .project-card img {
+    filter: none !important;
+    transition: none !important;
   }
-  
-  .reveal-wrapper img {
-    object-fit: cover;
-    object-position: top;
+
+  /* Hover no hace nada en móvil */
+  .project-card:hover img,
+  .project-card:hover .tooltip {
+    filter: none;
+    opacity: 1;
+    transform: none;
   }
-  /* * * * * email * * * * * * * * */
-/* Fondo oscuro del popup */
-#popup-form {
+
+  /* Distortion desactivado */
+  #distortion {
+    display: none !important;
+  }
+}
+
+
+
+
+#distortion {
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  
+
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+
+  pointer-events: none;
+  z-index: 999999;
+
+  backdrop-filter: grayscale(100%);
+  -webkit-backdrop-filter: grayscale(100%);
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
 }
-
-/* Contenido del popup */
-/* Fondo oscuro del popup */
-#popup-form {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-}
-
-/* Contenido del popup */
-label, input {
-  margin: 10px;
-}
-
-.field-group {
-  display: flex;
-  align-items: center;
-  
-}
-textarea {
-  flex: 1; /* El textarea ocupa todo el espacio posible */
-}
-
-.popup-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 8px;
-  width: 90%;
-  max-width: 50%;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-  position: relative;
-}
-
-/* Botón de cerrar */
-.popup-close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  font-size: 24px;
-  cursor: pointer;
-}
-
-/* Oculto al inicio */
-.popup-hidden {
-  display: none !important;
-}
-
-.btn_email{
-  border-radius: 5px;
-  border: none;
-  background-color: #90720d;
-  color: #fff;
- 
-  
-}
- /********************************/
-
-
-
-
-  /* Animación de revelado horizontal */
-  @keyframes revelarDeDerecha {
-    0% {
-      clip-path: inset(0 0 0 100%); /* todo oculto desde la derecha */
-    }
-    100% {
-      clip-path: inset(0 0 0 0); /* completamente visible */
-    }
-    0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.02);
-      }
-  }
-
-  @keyframes revelar2 {
-    0% {
-      clip-path: inset(0 0 100%); /* todo oculto desde la derecha */
-    }
-    100% {
-      clip-path: inset(0 0 0 0); /* completamente visible */
-    }
-    0%, 100% {
-        transform: scale(1);
-      }
-      50% {
-        transform: scale(1.02);
-      }
-  }
-  
-  
-
-  
-  /* efecto de pulsación suave */
-  @keyframes saltitoSuave {
-    0%, 100% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.02);
-    }
-  }
-  
-  
- 
-  /*MEDIA QUERY*/
-  @media (max-width: 850px) {
-  
-    .menu-desktop{
-        display: none;
-    }
-    .space_2{
-        height: 50%;
-    }
-
-        .my_container1{
-        padding: 0;
-        margin: 0 auto;
-        width: 100%;
-        height: auto;
-        display: block;
-        flex-flow: row;
-        
-    }
-    .my_container{
-        padding: 1rem;
-        margin: 0 auto;
-        width: 100%;
-        height: auto;
-        display: flex;
-        flex-flow: row;
-         }
-
-    .img_line{
-       visibility: hidden;
-       position: absolute;
-    } 
-  
-    .p_info{
-        height: 25vh;
-        overflow: scroll;
-        text-align: left;
-    }
-
-    .div_menu {
-        position: relative;
-        display: block;
-           
-      }
-    
-        .container_logo {
-        display: flex;
-        justify-content: center;
-        
-      }
-   
-      .sec_logo {
-        height:  10vh;
-       width: 100%;
-        background-image: url(../images/logo2.png);
-           background-size: contain;          
-       }
-
-      .p_info1{
-        text-align: left;
-        padding-left: 10px;
-        font-size: 1rem;
-        margin-bottom: -5px;
-      }
-    
-      
-    .sec_menu2{
-        padding: 5px;
-        margin: 5px;
-        position: relative;
-         text-align: left;
-        justify-content: center;
-        display: flex;
-        text-indent: 0.5rem;
-       transform: scale(0.9)
-    }
-    .div_menu_home {
-        border-right: 0;
-        }
-    
-    .space{
-        height: 2PX;
-        width: 100%;
-        background-color: black;
-    }
-    .sec_menu{
-        padding: 0;
-        margin: 0;
-        height: 0;
-        visibility: hidden;
-        visibility: hidden;
-    }
-   
-    .sec_hero{
-        width: auto;
-        height: 40vh;
-        background-size: contain;
-        background-repeat: no-repeat;
-        margin-bottom: -1rem !important;
-        padding: 0 !important;
-        position: relative;
-    }
-
-    .hero_text {
-        position: relative;
-        left: 0%;
-        top: 0%;
-        text-align: center;
-        justify-content: center;
-        color: black;
-        margin-bottom: 2rem !important;
-        padding: 10px !important;
-        z-index: 1;
-        background-color: transparent;
-      }
-     
-      footer.container_foot {
-        margin-top: 2rem;
-        text-align: center;
-        justify-content: center !important;
-        align-items: center !important;
-      
-      }
-      
-      .cont_footer {
-       
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        
-      }
-      .sec_project {
-        display: flex;
-        flex-direction: column; /* Asegura que los elementos se apilen */
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
-
-    .my_col {
-        margin: 1rem 0; /* Asegura que haya un pequeño espacio entre las columnas */
-        border: none !important;
-        border-top: solid !important;
-    }
-    .p_hover { /*este es el texto*/
-        font-size: 1rem;
-      }
-   
-  }

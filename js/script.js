@@ -1,320 +1,441 @@
+// ================= GOOGLE ANALYTICS =================
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-X2R58E5647');
 
-document.addEventListener('DOMContentLoaded', function () {
-  const images = document.querySelectorAll('.popup-img');
-  let currentIndex = 0;
 
-  // Crear el contenedor del popup
-  let popup = document.createElement('div');
-  popup.id = 'popup-container';
-  popup.style.position = 'fixed';
-  popup.style.top = 0;
-  popup.style.left = 0;
-  popup.style.width = '100vw';
-  popup.style.height = '100vh';
-  popup.style.backgroundColor = 'rgba(0,0,0,0.8)';
-  popup.style.display = 'none';
-  popup.style.alignItems = 'center';
-  popup.style.justifyContent = 'center';
-  popup.style.zIndex = 9999;
+// ================= MENU & HEADER SETUP =================
+const menuState = { open: false, updateUI: null };
 
-  const popupImg = document.createElement('img');
-  popupImg.style.maxWidth = '90%';
-  popupImg.style.maxHeight = '90%';
-  popupImg.style.transition = '0.3s ease';
-  popup.appendChild(popupImg);
+document.addEventListener("DOMContentLoaded", () => {
+  // Load header HTML dynamically
+  fetch("js/data/header.html")
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById("header").innerHTML = html;
 
-  // Botón anterior
-  const prevBtn = document.createElement('button');
-  prevBtn.innerHTML = '⟵';
-  prevBtn.style.position = 'absolute';
-  prevBtn.style.left = '20px';
-  prevBtn.style.top = '50%';
-  prevBtn.style.transform = 'translateY(-50%)';
-  prevBtn.style.fontSize = '2rem';
-  prevBtn.style.color = 'white';
-  prevBtn.style.background = 'none';
-  prevBtn.style.border = 'none';
-  prevBtn.style.cursor = 'pointer';
-  popup.appendChild(prevBtn);
+      // --- VARIABLES ---
+      const divMenu = document.getElementById('div_menutop');
+      const divFoot = document.getElementById('div_menubotom');
+      const footerBar = document.getElementById('foot_bar');
+      const btnHamburger = document.getElementById('menu_hamburguer');
+      const blurElements = document.getElementsByClassName('borroso');
+      const dropdownMenu = document.getElementById('navbarMenu');
+      const headerMenu = document.getElementById("header");
 
-  // Botón siguiente
-  const nextBtn = document.createElement('button');
-  nextBtn.innerHTML = '⟶';
-  nextBtn.style.position = 'absolute';
-  nextBtn.style.right = '20px';
-  nextBtn.style.top = '50%';
-  nextBtn.style.transform = 'translateY(-50%)';
-  nextBtn.style.fontSize = '2rem';
-  nextBtn.style.color = 'white';
-  nextBtn.style.background = 'none';
-  nextBtn.style.border = 'none';
-  nextBtn.style.cursor = 'pointer';
-  popup.appendChild(nextBtn);
+      const menuOriginalHTML = divMenu.innerHTML;
+      const footerOriginalHTML = divFoot.innerHTML;
+      const TOP_LIMIT = 50;
 
-  document.body.appendChild(popup);
+      // --- UTILITY FUNCTIONS ---
+      const applyBlur = activate => {
+        [...blurElements].forEach(el => 
+          el.style.filter = activate ? "blur(5px) brightness(0.3)" : "none"
+        );
+      };
 
-  function showImage(index) {
-    if (index >= 0 && index < images.length) {
-      popupImg.src = images[index].src;
-      currentIndex = index;
-    }
-  }
+      const updateDropdownVisibility = () => {
+        dropdownMenu.style.visibility = menuState.open ? "visible" : "hidden";
+      };
 
-  images.forEach((img, index) => {
-    img.addEventListener('click', function () {
-      showImage(index);
-      popup.style.display = 'flex';
-    });
-  });
+      // Responsive UI adjustment
+      menuState.updateUI = () => {
+        const width = window.innerWidth;
+        if (width < 765) {
+          divMenu.innerHTML = '';
+          divFoot.innerHTML = footerOriginalHTML;
+          btnHamburger.style.visibility = "visible";
+          updateDropdownVisibility();
+        } else {
+          divMenu.innerHTML = menuOriginalHTML;
+          divFoot.innerHTML = '';
+          footerBar.style.border = "none";
+          btnHamburger.style.visibility = "hidden";
+          dropdownMenu.style.visibility = "hidden";
+          menuState.open = false;
+          applyBlur(false);
+        }
+        updateColors(); // Apply correct colors after DOM changes
+      };
 
-  // Cerrar popup al hacer clic fuera de la imagen
-  popup.addEventListener('click', function (e) {
-    if (e.target === popup || e.target === popupImg) {
-      popup.style.display = 'none';
-      popupImg.src = '';
-    }
-  });
+      // Close menu when any link is clicked
+      document.querySelectorAll("a").forEach(link => {
+        link.addEventListener("click", () => {
+          document.body.style.overflow = '';
+          menuState.open = false;
+          applyBlur(false);
+          updateDropdownVisibility();
+        });
+      });
 
-  // Navegación
-  prevBtn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    showImage((currentIndex - 1 + images.length) % images.length);
-  });
+      // Sticky header on scroll
+      headerMenu.style.transition = "top 0.3s ease";
+      window.addEventListener("scroll", () => {
+        const scrollY = window.scrollY;
+        headerMenu.style.top = scrollY > TOP_LIMIT ? TOP_LIMIT + "px" : scrollY + "px";
+      });
 
-  nextBtn.addEventListener('click', function (e) {
-    e.stopPropagation();
-    showImage((currentIndex + 1) % images.length);
-  });
+      // Hamburger toggle
+      btnHamburger.addEventListener("click", () => {
+        menuState.open = !menuState.open;
+        document.body.style.overflow = menuState.open ? 'hidden' : '';
+        applyBlur(menuState.open);
+        updateDropdownVisibility();
+        dropdownMenu.classList.toggle('menu-overlay', menuState.open);
+      });
 
-  // Navegación con teclado
-  document.addEventListener('keydown', function (e) {
-    if (popup.style.display === 'flex') {
-      if (e.key === 'ArrowLeft') {
-        showImage((currentIndex - 1 + images.length) % images.length);
-      } else if (e.key === 'ArrowRight') {
-        showImage((currentIndex + 1) % images.length);
-      } else if (e.key === 'Escape') {
-        popup.style.display = 'none';
-        popupImg.src = '';
-      }
-    }
-  });
-});
-// menus top
-document.addEventListener('DOMContentLoaded', () => {
-  const headerHTML = `
-    <header class="row justify-content-between align-items-start">
-      <!-- Logo -->
-      <div class="col-9 col-md-6 container_logo"> 
-        <div class="sec_logoP" id="logoH">
-          <!-- Aquí va tu logo -->
-        </div>
-      </div>
+      // Window resize and load events
+      window.addEventListener('resize', menuState.updateUI);
+      menuState.updateUI(); // UNA sola vez, cuando el header ya existe
       
-      <!-- Menú horizontal -->
-      <div class="col-6 d-none d-lg-flex">
-        <div class="row w-100 justify-content-center">
-          <div class="col-auto  ">
-            <a class="active-link p_h2" href="index.html">home</a>
-          </div>
-          <div class="col-auto  ">
-            <a class="active-link p_h2" href="project.html">projects</a>
-          </div>
-          <div class="col-auto  ">
-           <a class="active-link p_h2" href="experience.html">expertise</a>
-          </div>
-          <div class="col-auto  ">
-           <a class="active-link p_h2" href="aboutme.html">about me</a>
-          </div>
-          <div class="col-auto ">
-          <a class="active-link p_h2" href="contact.html">contact</a>
-          </div>
-        </div>
-      </div>
-    
-      <!-- Menú hamburguesa (solo en pantallas pequeñas) -->
-      <div class="col-3 d-flex align-items-center justify-content-end d-block d-lg-none">
-        <nav class="navbar">
-          <div class="container-fluid">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
-              <span class="navbar-toggler-icon btn_menu"></span>
-            </button>
-            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-              <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel"></h5>
-                <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close">
-                  <span class="navbar-toggler-icon btn_menu2"></span>
-                </button>
-              </div>
-              <div class="offcanvas-body" style="dysplay=block;">
-               
-                
-                    <a class="active-link p_h_m" href="index.html">home</a>
-                    <a class="active-link p_h_m " href="project.html">project</a>
-                    <a class="active-link p_h_m"  href="experience.html">expertise</a>
-                    <a class="active-link p_h_m" href="aboutme.html">about me</a>
-                    <a class=" active-link p_h_m" href="contact.html">contact</a>
-             
-              </div>
-            </div>
-          </div>
-        </nav>
-      </div>
-    </header>
-  `
-  
-  ;
-
-  // Insertar el header en el contenedor
-  const container = document.getElementById('header-container');
-  if (container) {
-    container.innerHTML = headerHTML;
-  }
-});
-
-// menus footer
-document.addEventListener('DOMContentLoaded', () => {
-  const footerHTML = `
-   <footer class="container-fluid row container_foot justify-content-center align-items-center">
-  <div class="col-12 col-md-2 cont_footer">
-      <a class="active-link p_h" href="index.html">home</a>
-      
-  </div>
-  <div class="col-12 col-md-2 cont_footer">
-     <a class="active-link p_h" href="project.html">projects</a>
-  </div>
-  <div class="col-12 col-md-2 cont_footer"> 
-    <a class="active-link p_h" href="experience.html">expertise</a>
- </div>
-  <div class="col-12 col-md-2 cont_footer">
-     <a class="active-link p_h" href="aboutme.html">about_me</a>
-  </div>
-  <div class="col-12 col-md-2 cont_footer">
-   <a class="active-link p_h" href="contact.html">contact</a>
-
-</div>
- 
-</footer>
-  `
-  
-  ;
-
-  // Insertar el header en el contenedor
-  const container = document.getElementById('footer-container');
-  if (container) {
-    container.innerHTML = footerHTML;
-  }
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-  const link = document.getElementById('link_logoV');
-  
-  if (link) {
-    // Cambia el cursor a pointer
-    link.style.cursor = 'pointer';
-
-    // Redirige al hacer clic
-    link.addEventListener('click', () => {
-      window.location.href = 'aboutme.html'; // cambia esto por tu página real
-    });
-  }
-});
-
-document.addEventListener('DOMContentLoaded',()=>{
-  const link_home = document.getElementById('logoH');
-  
-  if (link_home) {
-    link_home.style.cursor = 'pointer';
-    link_home.addEventListener('click',()=>{
-      window,location.href = 'index.html';
-    });
-  }
-
-});
-
-
-
-
-document.addEventListener("DOMContentLoaded", function() {
-  // Mostrar el formulario
-  document.getElementById("open-form").addEventListener("click", function(event) {
-    event.preventDefault(); // Evita que el link recargue la página
-    document.getElementById("popup-form").classList.remove("popup-hidden");
-  });
-
-  // Cerrar el formulario
-  document.getElementById("close-form").addEventListener("click", function() {
-    document.getElementById("popup-form").classList.add("popup-hidden");
-  });
-});
-
-/*PROJECTS*/
-document.querySelectorAll('.project-card .project-link').forEach(link => {
-  link.addEventListener('click', (e) => {
-    e.preventDefault(); 
-    const projectId = e.target.closest('.project-card').dataset.id;
-    sessionStorage.setItem('selectedProject', projectId);
-    window.location.href = 'p_descript.html';
-  });
-});
-
-const projectId = sessionStorage.getItem('selectedProject'); // obtener el proyecto
-const projectContainer = document.getElementById('projects-list');
-
-if (!projectId) {
-  projectContainer.innerHTML = '<p>No se seleccionó ningún proyecto.</p>';
-} else {
-  
-  fetch('js/data/projects.json')
-    .then(res => res.json())
-    .then(data => {
-      const project = data.projects.find(p => p.id === projectId);
-      if (!project) {
-        projectContainer.innerHTML = '<p>Proyecto no encontrado.</p>';
-        return;
-      }
-      let imagesHtml = '';
-project.images.forEach(img => {
-  imagesHtml += `
-    <div class="col-6 mb-3">
-      <img src="${img}" class="img-fluid" alt="${project.title}">
-    </div>
-  `;
-});
-
-
-// breadcrumb
-const breadcrumb = document.getElementById('breadcrumb');
-breadcrumb.innerHTML += ` ${project.title}`;
-
-      projectContainer.innerHTML = `
-      <h1>${project.title}</h1>
-            <h2 class="my-5">${project.subtitle}</h2>
-             <a class="my-5" href="${project.live}">See it Live </a>
-
-       <p>${project.description}</p>
-       <div class="row">
-       
-        ${imagesHtml}
-       
-       </div>
-  
-  <p><strong>Technologies:</strong> ${project.technologies.join(', ')}</p>
-
-      `;
+   // window.addEventListener('load', menuState.updateUI);
     })
-    .catch(err => {
-      console.error(err);
-      projectContainer.innerHTML = '<p>Error al cargar el proyecto.</p>';
-    });
+    .catch(err => console.error("Header load error:", err));
+});
+
+
+// ================= SMOOTH SCROLL =================
+function scrollToSection(targetId) {
+  const target = document.getElementById(targetId);
+  if (!target) return;
+  const offset = targetId === "section1" ? 0 : window.innerHeight * 0.10;
+  window.scrollTo({ top: target.offsetTop - offset, behavior: "smooth" });
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(link => {
+  link.addEventListener('click', e => {
+    e.preventDefault();
+    scrollToSection(link.getAttribute('href').substring(1));
+    setTimeout(updateColors, 50);
+  });
+});
+
+
+// ================= INTRO ANIMATION =================
+
+window.addEventListener('load', () => {
+  if (!window.location.pathname.endsWith("index.html") && window.location.pathname !== "/") return;
+
+  //const intro = document.getElementById("intro");
+  //const logo = document.getElementById('imgLogoIntro');
+  const headerMenu = document.getElementById("header");
+  const pHome = document.getElementById("pHome");
+  //const GIF_DURATION = 15000;
+
+  //logo.src = `images/bigLogo.gif?${new Date().getTime()}`;
+  headerMenu.style.display = "none";
+  pHome.style.display = "none";
+  document.getElementById("section1").style.display = "none";
+ 
+ // let introFinished = false;
+
+  //const finishIntro = () => {
+   // if (introFinished) return;
+  //  introFinished = true;
+   // clearTimeout(introTimeout);
+
+ //   intro.style.display = "none";
+    document.getElementById("section1").style.display = "block";
+ //   if (typeof menuState.updateUI === "function") menuState.updateUI();
+
+    // Typewriter for section1 text
+    typeWriterWords(
+      document.getElementById("section1Text"),
+      document.getElementById("section1Text").textContent,
+      350,
+      () => {
+        // Show header and pHome
+        headerMenu.style.display = "block";
+        pHome.style.display = "block";
+
+        headerMenu.classList.add("show");
+        pHome.classList.add("show");
+       /* requestAnimationFrame(() => {
+          headerMenu.classList.add("show");
+          pHome.classList.add("show");
+        });*/
+
+        // Show section2 & section3
+        ["section2","section3"].forEach(id => {
+          const sec = document.getElementById(id);
+          sec.style.display = "block";
+         
+          setTimeout(() => sec.classList.add("show"), 200);
+        });
+
+        hoverWords("section1Text", "Graphic web design");
+        pHomeEffect(); // start word highlight
+      }
+    );
+ // };
+
+  //const introTimeout = setTimeout(finishIntro, GIF_DURATION);
+
+  // Skip intro
+  /*const tooltip = document.getElementById("skipTooltip");
+  logo.addEventListener("mouseenter", () => { tooltip.textContent = "Skip Animation"; tooltip.style.visibility = "visible"; tooltip.style.opacity = 1; });
+  logo.addEventListener("mouseleave", () => { tooltip.style.opacity = 0; setTimeout(() => tooltip.style.visibility = "hidden", 200); });
+  logo.addEventListener("mousemove", e => { tooltip.style.left = e.clientX + 15 + "px"; tooltip.style.top = e.clientY + 15 + "px"; });
+  logo.addEventListener("click", () => { tooltip.style.visibility = "hidden"; tooltip.style.opacity = 0; finishIntro(); });*/
+});
+
+
+
+// ================= TYPEWRITER WORDS =================
+function typeWriterWords(el, txt, speed = 250, onComplete) {
+  el.style.opacity = "1";
+  el.textContent = "";
+  const words = txt.split(" ");
+  let i = 0;
+  (function write() {
+    if (i < words.length) {
+      const span = document.createElement("span");
+      span.textContent = words[i] + " ";
+      span.style.opacity = "0";
+      span.style.transition = "opacity 0.8s ease";
+      el.appendChild(span);
+      void span.offsetWidth;
+      span.style.opacity = "1";
+      i++;
+      setTimeout(write, speed);
+    } else if (typeof onComplete === "function") onComplete();
+  })();
 }
 
 
+// ================= PHOME WORD HIGHLIGHT EFFECT =================
+function pHomeEffect() {
+  const pT = document.getElementById("pHome");
+  if(!pT) return;
+
+  const words = pT.textContent.split(" ");
+  pT.textContent = "";
+  const spans = words.map(word => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.classList.add("word");
+    span.dataset.baseColor = ""; // will be set dynamically
+    pT.appendChild(span);
+    pT.appendChild(document.createTextNode(" "));
+    return span;
+  });
+  let index = 0;
+  setInterval(() => {
+    const sectionColor = getCurrentSectionColor(); // color de sección actual
+    spans.forEach(span => { 
+      span.classList.remove("active"); 
+      span.style.color = "#ffffff"; // default color for inactive words
+      span.dataset.baseColor = "#ffffff";
+    });
+    spans[index].classList.add("active");
+    spans[index].style.color = sectionColor; // highlight color = color de sección
+    index = (index + 1) % spans.length;
+  }, 500);
+  
+}
+
+
+// ================= DYNAMIC COLOR CHANGE =================
+function getCurrentSectionColor() {
+  const sections = ["section1","section2","section3"].map(id => document.getElementById(id));
+  let visibleSection = sections.find(sec => {
+    if(!sec) return false;
+    const rect = sec.getBoundingClientRect();
+    return rect.top < window.innerHeight*0.5 && rect.bottom > window.innerHeight*0.5;
+  });
+  if(!visibleSection) return "#252525";
+  return visibleSection.id === "section1" ? "#252525" : "#E3E5D2";
+}
+
+function changeElementColors(bgColor) {
+  const isDarkColor = color => {
+    const rgb = color.match(/\d+/g).map(Number);
+    const luminance = 0.299*rgb[0]+0.587*rgb[1]+0.114*rgb[2];
+    return luminance < 140;
+  };
+  const textColor = isDarkColor(bgColor) ? "#E3E5D2" : "#252525";
+
+  // Only apply to base elements, not spans inside hoverWords/pHome
+  document.querySelectorAll("h1,h2,h3,h4,h5,h6,p,a,i,button").forEach(el => {
+    if(!el.closest("#section1Text") && !el.closest("#pHome")) el.style.color = textColor;
+  });
+
+  const footer = document.getElementById("foot_bar");
+  if(footer) footer.style.borderTop = `2px solid ${textColor}`;
+}
+
+function updateColors() {
+  const color = getCurrentSectionColor();
+  changeElementColors(color);
+}
+
+window.addEventListener('scroll', updateColors);
+window.addEventListener('resize', () => { menuState.updateUI(); });
+window.addEventListener('load', updateColors);
+
+
+// ================= HOVER WORDS EFFECT =================
+function hoverWords(elementId, hoverText) {
+  const h1 = document.getElementById(elementId);
+  if (!h1) return;
+
+  const baseWords = h1.textContent.trim().split(" ");
+  const hoverWordsArr = hoverText.trim().split(" ");
+  if (baseWords.length !== hoverWordsArr.length) return console.warn("Base text and hover text must have same number of words");
+
+  h1.textContent = "";
+  baseWords.forEach((baseWord,i)=>{
+    const wrapper = document.createElement("span");
+    wrapper.style.position="relative"; 
+    wrapper.style.cursor="default"; 
+    wrapper.style.display="block"; 
+    wrapper.style.marginBottom="0.2em";
+
+    const baseSpan = document.createElement("span"); 
+    baseSpan.textContent=baseWord;
+
+    const overlay = document.createElement("span");
+    overlay.textContent=hoverWordsArr[i];
+    overlay.style.position="absolute"; overlay.style.left="0"; overlay.style.top="0"; overlay.style.whiteSpace="nowrap";
+    overlay.style.opacity="0"; overlay.style.pointerEvents="none";
+    overlay.style.transition="opacity 0.2s ease, transform 0.2s ease"; 
+    overlay.style.color="#ffffff"; overlay.style.fontWeight="600"; overlay.style.filter="blur(2px)";
+
+    wrapper.addEventListener("mouseenter",()=>{overlay.style.opacity="0.7"; overlay.style.transform="translateY(50px) translateX(150px) scale(1.5)";});
+    wrapper.addEventListener("mouseleave",()=>{overlay.style.opacity="0"; overlay.style.transform="none";});
+
+    wrapper.appendChild(baseSpan); wrapper.appendChild(overlay); h1.appendChild(wrapper);
+  });
+}
+
+
+// ================= TYPEWRITER FOR OTHER TITLES =================
+function typeWriter(el, speed = 100, step = 1, onComplete) {
+  const text = el.textContent;
+  el.textContent = "";
+  let i = 0;
+
+  function write() {
+    if (i < text.length) {
+      const char = text[i];
+      const span = document.createElement("span");
+      span.textContent = char === " " ? "\u00A0" : char;
+      span.style.display = "inline-block";
+      span.style.transition = "transform 0.3s ease";
+      span.style.transform = "scale(0)";
+      el.appendChild(span);
+      void span.offsetWidth;
+      setTimeout(() => { span.style.transform = "scale(1)"; }, 50);
+
+      i += step;
+      setTimeout(write, speed);
+    } else if(typeof onComplete==="function") onComplete();
+  }
+
+  write();
+}
+
+// IntersectionObserver for all elements with class "title-animate"
+// will animate every time they enter viewport
+const titles = document.querySelectorAll(".title-animate");
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      typeWriter(entry.target, 200, 1);
+    }
+  });
+},{threshold: 0.4});
+titles.forEach(title => observer.observe(title));
 
 
 
+// ================= GRID GALLERY =================
+fetch('js/data/projects.json')
+ 
+.then(res => res.json())
+.then(data => {
+  const grid = document.getElementById('projectsGrid');
+  data.projects.forEach(proj => {
+    const card = document.createElement('div');
+    card.classList.add('project-card');
 
+    // Usar hero si existe, si no un placeholder
+    const heroImg = proj.hero.trim() !== "" ? proj.hero.trim() : 'images/placeholder.png';
 
+    card.innerHTML = `
+    <img src="${heroImg}" alt="${proj.title}">
+    
+    <div class="tooltip">
 
+      <span class="tooltip-text">
+        ${proj.title}<br>${proj.description.substring(0, 100)}...
+      </span>
+    </div>
+  
+    <!-- icono móvil centrado y clicable -->
+    <span class="mobile-icon" style="display:none;">
+      <a href="${proj.link}" ><i class="fa-solid fa-square-up-right"></i></a>
+    </span>
+  `;
+  
 
+  
+    // Click en móvil para mostrar tooltip
+    const tooltipIcon = card.querySelector('.tooltip-icon');
+    const tooltipText = card.querySelector('.tooltip-text');
+    tooltipIcon?.addEventListener('click', e => {
+      e.stopPropagation(); // evita que dispare el click en la tarjeta
+      tooltipText.style.display = tooltipText.style.display === 'block' ? 'none' : 'block';
+    });
 
+    // Click en la tarjeta → página de detalles
+    card.addEventListener('click', () => {
+      window.location.href = proj.link;
+    });
+    
+    grid.appendChild(card);
+  });
+})
+.catch(err => console.error(err));
+
+// ================= DISTORTION =================
+
+document.addEventListener("DOMContentLoaded", () => {
+  const distortion = document.getElementById("distortion");
+  const grid = document.getElementById("projectsGrid");
+
+  if (!distortion || !grid) return;
+
+  // mover solo cuando esté activo
+  grid.addEventListener("mousemove", (e) => {
+    distortion.style.left = e.clientX + "px";
+    distortion.style.top  = e.clientY + "px";
+  });
+
+  // mostrar al entrar al grid
+  grid.addEventListener("mouseenter", () => {
+    distortion.style.opacity = "1";
+  });
+
+  // ocultar al salir del grid
+  grid.addEventListener("mouseleave", () => {
+    distortion.style.opacity = "0";
+  });
+});
+
+//DONT SHOW THE BUBBLES ON 2
+const balls = document.querySelectorAll('.bouncing-ball');
+const section1 = document.getElementById('section1');
+
+const observer2 = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if(entry.isIntersecting){
+      balls.forEach(b => b.style.display = 'block');
+    } else {
+      balls.forEach(b => b.style.display = 'none');
+    }
+  });
+}, { threshold: 0.5 });
+
+observer2.observe(section1);

@@ -1,0 +1,496 @@
+<!-- EFECTO SIN TYPE FRASE COMPLETA
+<h3 id="pHome2">I craft websites to fit every need, customized for the problem at hand.</h3>
+
+<style>
+#pHome2 span {
+  opacity: 0.6;
+}
+
+#pHome2:hover span {
+  transform: scale(1.25);
+  opacity: 1;
+}
+
+
+</style>
+<script>
+  const pT2 = document.getElementById("pHome2");
+  const text2 = pT2.textContent;
+  
+  pT2.textContent = "";
+  
+  text2.split("").forEach(char => {
+    
+    const span2 = document.createElement("span");
+    span2.textContent = char === " " ? "\u00A0" : char;
+    
+    pT2.appendChild(span2);
+  });
+  </script>-->
+
+  
+
+
+
+  <!-- EFECTO POR LETRA <h3 id="pHome">I craft websites to fit every need, customized for the problem at hand.</h3>
+
+<script>
+const pT = document.getElementById("pHome");
+const text = pT.textContent; // Tomamos el texto del <p>
+pT.textContent = ""; // Limpiamos el <p> para la animación
+
+function typeWriter(el, txt, speed = 50, step = 1, effect = "scale", onComplete) {
+  let i = 0;
+
+  function write() {
+    if (i < txt.length) {
+      const char = txt[i];
+      const span = document.createElement("span");
+      span.textContent = char === " " ? "\u00A0" : char;
+      span.style.display = "inline-block";
+
+      // Animación inicial
+      span.style.transition = "transform 0.3s ease";
+      span.style.transform = "scale(0)";
+
+      el.appendChild(span);
+
+      // Forzar que el navegador registre el estado inicial
+      void span.offsetWidth;
+
+      // Animación de aparición
+      setTimeout(() => {
+        span.style.transform = "scale(1)";
+      }, 50);
+
+  
+      i += step;
+      setTimeout(write, speed);
+    } else {
+      if (typeof onComplete === "function") onComplete();
+    }
+  }
+
+  write();
+}
+
+// Llamamos la función usando el texto del <p>
+typeWriter(pT, text, 50, 1, "scale", () => {
+  console.log("Animación completa");
+});
+</script>-->
+
+<!-- EFECTO POR PALABRA <h3 id="pHome">I craft websites to fit every need, customized for the problem at hand.</h3>
+
+<script>
+  const pT = document.getElementById("pHome");
+  const text = pT.textContent;
+  
+  pT.textContent = "";
+  
+  text.split(" ").forEach(word => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.classList.add("word");
+    pT.appendChild(span);
+  
+    // espacio entre palabras
+    pT.appendChild(document.createTextNode("\u00A0"));
+  });
+  </script>
+
+<STYle>
+  #pHome .word {
+  display: inline-block;
+  transition: transform 0.3s ease, letter-spacing 0.3s ease;
+}
+
+#pHome .word:hover {
+  transform: scale(1.25);
+  letter-spacing: 1px;
+}
+
+</STYle>-->
+<!--
+<h3 id="pHome">I craft websites to fit every need, customized for the problem at hand.</h3>
+
+<script>
+  const pT = document.getElementById("pHome");
+  const words = pT.textContent.split(" ");
+  
+  pT.textContent = "";
+  
+  const spans = words.map(word => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.classList.add("word");
+    pT.appendChild(span);
+    pT.appendChild(document.createTextNode(" "));
+    return span;
+  });
+  
+  let index = 0;
+  
+  setInterval(() => {
+    // quitar énfasis anterior
+    spans.forEach(span => span.classList.remove("active"));
+  
+    // activar palabra actual
+    spans[index].classList.add("active");
+  
+    index = (index + 1) % spans.length; // vuelve al inicio
+  }, 400); // velocidad de lectura
+  </script>
+  
+  
+  
+<style>
+#pHome {
+  color: #9a9a9a;
+}
+
+#pHome .word {
+  transition: color 0.25s ease;
+}
+
+#pHome .word.active {
+  color: #111;
+}
+
+
+</style>-->
+
+<!--EJEMPLO GALERIA CON DISTORCION EN EL MOUSE-->
+
+<!--
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Projects</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+
+  #projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(40%, 1fr));
+  gap: 20px;
+}
+
+
+
+.project-card {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  z-index: 1;
+}
+.project-card img {
+  width: 100%;
+  display: block;
+  transition: filter 0.3s, transform 0.3s;
+  filter: brightness(30%); /* filtrado inicial */
+}
+
+.project-card:hover img {
+  filter: none; /* al pasar el mouse se quita */
+}
+
+.project-card img {
+  width: 100%;
+  display: block;
+  transition: transform 0.3s, filter 0.3s;
+}
+
+/* efecto hover desktop: imagen se colorea y aparece tooltip */
+.project-card .tooltip {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0,0,0,0.7);
+  color: #fff;
+  padding: 15px;
+  opacity: 0;
+  transform: translateY(100%);
+  transition: opacity 0.3s, transform 0.3s;
+  font-size: 0.9em;
+  line-height: 1.3;
+}
+
+.project-card:hover img {
+  filter: non;
+}
+
+.project-card:hover .tooltip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Móvil: mostrar de uno en uno */
+@media (max-width: 768px) {
+  #projectsGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .project-card .tooltip {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: auto;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 12px;
+    font-size: 0.85em;
+    transform: translateY(0);
+    opacity: 1;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .project-card:hover img {
+    filter: none; /* no cambia en móvil */
+  }
+
+  .tooltip-text {
+    display: none; /* texto solo aparece al tap */
+  }
+
+  .tooltip-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: solid #fff;
+    border-width: 0 2px 2px 0;
+    padding: 4px;
+    transform: rotate(45deg);
+    cursor: pointer;
+  }
+  #distortion {
+    display: none !important;
+  }
+}
+/* Desktop: no mostrar */
+.mobile-icon {
+  display: none;
+}
+
+/* Móvil: mostrar y posicionar */
+@media (max-width: 768px) {
+  .mobile-icon {
+    display: block;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    color: #fff;
+    font-size: 1.2em;
+    z-index: 10;
+    pointer-events: none; /* para que no bloquee el click en la tarjeta */
+  }
+  .tooltip-icon{
+    display: none;
+  }
+}
+
+
+#distortion {
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+
+  pointer-events: none;
+  z-index: 999999;
+
+  backdrop-filter: grayscale(100%);
+  -webkit-backdrop-filter: grayscale(100%);
+
+  border: 1px solid rgba(255,255,255,0.25);
+
+  transform: translate(-50%, -50%);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+
+</style>
+  <h1>My Projects</h1>
+  <section id="projectsGrid"></section>
+
+  <script>
+    fetch('js/data/projects.json')
+ 
+  .then(res => res.json())
+  .then(data => {
+    const grid = document.getElementById('projectsGrid');
+    data.projects.forEach(proj => {
+      const card = document.createElement('div');
+      card.classList.add('project-card');
+
+      // Usar hero si existe, si no un placeholder
+      const heroImg = proj.hero.trim() !== "" ? proj.hero.trim() : 'images/placeholder.png';
+
+      card.innerHTML = `
+  <img src="${heroImg}" alt="${proj.title}">
+  <div class="tooltip">
+    <span class="tooltip-text">
+      ${proj.title}<br>${proj.description.substring(0, 100)}...
+    </span>
+    <span class="tooltip-icon"></span>
+  </div>
+  <span class="mobile-icon"><i class="fa-solid fa-square-up-right"></i></span>
+`;
+
+
+      // Click en móvil para mostrar tooltip
+      const tooltipIcon = card.querySelector('.tooltip-icon');
+      const tooltipText = card.querySelector('.tooltip-text');
+      tooltipIcon?.addEventListener('click', e => {
+        e.stopPropagation(); // evita que dispare el click en la tarjeta
+        tooltipText.style.display = tooltipText.style.display === 'block' ? 'none' : 'block';
+      });
+
+      // Click en la tarjeta → página de detalles
+      card.addEventListener('click', () => {
+        window.location.href = `projects/${proj.id}.html`;
+      });
+
+      grid.appendChild(card);
+    });
+  })
+  .catch(err => console.error(err));
+
+
+//distortion
+
+document.addEventListener("DOMContentLoaded", () => {
+  const distortion = document.getElementById("distortion");
+  const grid = document.getElementById("projectsGrid");
+
+  if (!distortion || !grid) return;
+
+  // mover solo cuando esté activo
+  grid.addEventListener("mousemove", (e) => {
+    distortion.style.left = e.clientX + "px";
+    distortion.style.top  = e.clientY + "px";
+  });
+
+  // mostrar al entrar al grid
+  grid.addEventListener("mouseenter", () => {
+    distortion.style.opacity = "1";
+  });
+
+  // ocultar al salir del grid
+  grid.addEventListener("mouseleave", () => {
+    distortion.style.opacity = "0";
+  });
+});
+
+
+
+
+  </script>
+  <div id="distortion"></div>
+</body>
+</html>
+-->
+
+<section id="section1">
+  <h1>Sección 1</h1>
+  <p>Contenido debajo de la pelota. Prueba a ver cómo se ve cuando la pelota pasa encima de este texto.</p>
+  <p>Más contenido para que se note el efecto.</p>
+</section>
+
+<section id="section2">
+  <h2>Sección 2</h2>
+  <p>Aquí no aparece la pelota.</p>
+</section>
+
+<!-- Pelota que aplica blur al contenido debajo -->
+<div class="bouncing-ball ball1"></div>
+<div class="bouncing-ball ball2"></div>
+<div class="bouncing-ball ball3"></div>
+<style>
+/* Pelota que rebota y hace blur al contenido debajo */
+.bouncing-ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: 9999;
+  border: 3px solid rgba(255, 255, 255, 0.6); /* color y grosor */
+
+  /* Fondo semitransparente para que se vea el blur */
+  background-color: rgba(255,255,255,0.1);
+
+  /* El truco: blur al contenido que está detrás */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+
+  pointer-events: none; /* no bloquea clicks */
+
+
+}
+
+/* Rebote simple */
+/* Pelota 1 - esquina superior izquierda */
+@keyframes bounce1 {
+  0%   { transform: translate(0, 0); }           /* esquina izquierda-norte */
+  25%  { transform: translate(70vw, 20vh); }
+  50%  { transform: translate(60vw, 70vh); }
+  75%  { transform: translate(10vw, 60vh); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Pelota 2 - esquina inferior derecha */
+@keyframes bounce2 {
+  0%   { transform: translate(90vw, 90vh); }     /* esquina derecha-sur */
+  25%  { transform: translate(50vw, 70vh); }
+  50%  { transform: translate(60vw, 20vh); }
+  75%  { transform: translate(80vw, 60vh); }
+  100% { transform: translate(90vw, 90vh); }
+}
+
+/* Pelota 3 - esquina inferior izquierda */
+@keyframes bounce3 {
+  0%   { transform: translate(0, 90vh); }       /* esquina izquierda-sur */
+  25%  { transform: translate(30vw, 70vh); }
+  50%  { transform: translate(50vw, 20vh); }
+  75%  { transform: translate(10vw, 40vh); }
+  100% { transform: translate(0, 90vh); }
+}
+
+
+.ball1 { animation: bounce1 10s infinite linear; }
+.ball2 { animation: bounce2 12s infinite linear; }
+.ball3 { animation: bounce3 14s infinite linear; }
+
+
+/* Secciones */
+#section1 {
+  position: relative;
+  height: 100vh;
+  background-color: white;
+  color: brown;
+  padding: 2rem;
+}
+
+#section2 {
+  height: 100vh;
+  background-color: lightgray;
+  padding: 2rem;
+}
+
+</style>
+
+
