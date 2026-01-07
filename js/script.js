@@ -115,7 +115,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // ================= INTRO ANIMATION =================
 
 window.addEventListener('load', () => {
-  if (!window.location.pathname.endsWith("index.html") && window.location.pathname !== "/") return;
+ 
 
   //const intro = document.getElementById("intro");
   //const logo = document.getElementById('imgLogoIntro');
