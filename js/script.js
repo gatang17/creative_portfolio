@@ -115,29 +115,32 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // ================= INTRO ANIMATION =================
 
 window.addEventListener('load', () => {
- 
-
-  //const intro = document.getElementById("intro");
-  //const logo = document.getElementById('imgLogoIntro');
+  
+  const intro = document.getElementById("intro");
+  const logo = document.getElementById('imgLogoIntro');
   const headerMenu = document.getElementById("header");
   const pHome = document.getElementById("pHome");
-  //const GIF_DURATION = 15000;
-
-  //logo.src = `images/bigLogo.gif?${new Date().getTime()}`;
+  const GIF_DURATION = 15000;
+  const section1 = document.getElementById("section1");
+  
+  
+  
+ logo.src = `images/bigLogo.gif?${new Date().getTime()}`;
   headerMenu.style.display = "none";
   pHome.style.display = "none";
   document.getElementById("section1").style.display = "none";
  
- // let introFinished = false;
+ let introFinished = false;
 
-  //const finishIntro = () => {
-   // if (introFinished) return;
-  //  introFinished = true;
-   // clearTimeout(introTimeout);
+  const finishIntro = () => {
+   if (introFinished) return;
+   introFinished = true;
+ clearTimeout(introTimeout);
 
- //   intro.style.display = "none";
+   intro.style.display = "none";
     document.getElementById("section1").style.display = "block";
- //   if (typeof menuState.updateUI === "function") menuState.updateUI();
+  
+   if (typeof menuState.updateUI === "function") menuState.updateUI();
 
     // Typewriter for section1 text
     typeWriterWords(
@@ -148,13 +151,13 @@ window.addEventListener('load', () => {
         // Show header and pHome
         headerMenu.style.display = "block";
         pHome.style.display = "block";
-
+        window.scrollTo({ top: section1.offsetTop, behavior: "auto" });
         headerMenu.classList.add("show");
         pHome.classList.add("show");
-       /* requestAnimationFrame(() => {
+       requestAnimationFrame(() => {
           headerMenu.classList.add("show");
           pHome.classList.add("show");
-        });*/
+        });
 
         // Show section2 & section3
         ["section2","section3"].forEach(id => {
@@ -168,28 +171,30 @@ window.addEventListener('load', () => {
         pHomeEffect(); // start word highlight
       }
     );
- // };
+  };
 
-  //const introTimeout = setTimeout(finishIntro, GIF_DURATION);
+const introTimeout = setTimeout(finishIntro, GIF_DURATION);
 
   // Skip intro
-  /*const tooltip = document.getElementById("skipTooltip");
+  const tooltip = document.getElementById("skipTooltip");
   logo.addEventListener("mouseenter", () => { tooltip.textContent = "Skip Animation"; tooltip.style.visibility = "visible"; tooltip.style.opacity = 1; });
   logo.addEventListener("mouseleave", () => { tooltip.style.opacity = 0; setTimeout(() => tooltip.style.visibility = "hidden", 200); });
   logo.addEventListener("mousemove", e => { tooltip.style.left = e.clientX + 15 + "px"; tooltip.style.top = e.clientY + 15 + "px"; });
-  logo.addEventListener("click", () => { tooltip.style.visibility = "hidden"; tooltip.style.opacity = 0; finishIntro(); });*/
+  logo.addEventListener("click", () => { tooltip.style.visibility = "hidden"; tooltip.style.opacity = 0; finishIntro(); });
 });
 
 
 
 // ================= TYPEWRITER WORDS =================
 function typeWriterWords(el, txt, speed = 250, onComplete) {
+ 
   el.style.opacity = "1";
   el.textContent = "";
   const words = txt.split(" ");
   let i = 0;
   (function write() {
     if (i < words.length) {
+      
       const span = document.createElement("span");
       span.textContent = words[i] + " ";
       span.style.opacity = "0";
@@ -199,8 +204,10 @@ function typeWriterWords(el, txt, speed = 250, onComplete) {
       span.style.opacity = "1";
       i++;
       setTimeout(write, speed);
+      
     } else if (typeof onComplete === "function") onComplete();
-  })();
+  }
+)();
 }
 
 
