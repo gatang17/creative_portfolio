@@ -46,10 +46,10 @@ body {
 
 #section1Text {
   text-align: left;
-  display: inline-block; /* para que los spans se alineen como un bloque centrado */
+  padding: 25px;
   font-weight: 700; 
-  font-size: clamp(4rem, 15vw, 8rem);
-  padding: 2rem;
+  font-size: clamp(5rem, 15vw, 8rem);
+
 }
 
 /* ******** text effects*/
@@ -103,7 +103,7 @@ h1 {
 
   font-style: normal;
   text-transform: uppercase;
- //*margin: clamp(3rem, 5vw, 8rem)!important; /* mínimo 3rem, escala con 5% del viewport, máximo 8rem */
+
  
 }
 
