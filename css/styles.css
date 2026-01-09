@@ -8,6 +8,7 @@ body {
 
   font-family: 'Roboto', sans-serif;
   background-color:#dadada;
+  height: 100vh;
 }
 /*menu hamburguer icon*/
 .fas{
@@ -19,18 +20,27 @@ body {
   height: 100vh;
   overflow: hidden;
   position: relative;
+  padding-bottom: 10%;
   }
 
 #section2{ 
   background-color: #252525;
-  height: 100vh;
+  height: 100%;
   position: relative;
+  padding-bottom: 10%;
+}
+
+#section2 > * {
+
+  box-sizing: border-box; /* evita que padding agrande el tamaño */
 }
 
 #section3{ 
+  position: relative;
+  padding-top: 5%;
   padding-bottom: 10%;
   background-color: #252525;
-  height: 100vh;
+  height: 100VH;
   
 }
 
@@ -252,80 +262,103 @@ footer {
 }
 
 /*EFECTOS*/
-/* Pelota que rebota y hace blur al contenido debajo */
-.bouncing-ball {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 500px;
-  height: 500px;
-  border-radius: 50%;
-  z-index: 9999;
-  border: 3px solid rgba(255, 255, 255, 0.6); /* color y grosor */
-
-  /* Fondo semitransparente para que se vea el blur */
-  background-color: rgba(255,255,255,0.1);
-
-  /* El truco: blur al contenido que está detrás */
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-
-  pointer-events: none; /* no bloquea clicks */
 
 
-}
-
-/* Rebote simple */
-/* Pelota 1 - esquina superior izquierda */
-@keyframes bounce1 {
-  0%   { transform: translate(0, 0); }           /* esquina izquierda-norte */
-  25%  { transform: translate(70vw, 20vh); }
-  50%  { transform: translate(60vw, 70vh); }
-  75%  { transform: translate(10vw, 60vh); }
-  100% { transform: translate(0, 0); }
-}
-
-/* Pelota 2 - esquina inferior derecha */
-@keyframes bounce2 {
-  0%   { transform: translate(90vw, 90vh); }     /* esquina derecha-sur */
-  25%  { transform: translate(50vw, 70vh); }
-  50%  { transform: translate(60vw, 20vh); }
-  75%  { transform: translate(80vw, 60vh); }
-  100% { transform: translate(90vw, 90vh); }
-}
-
-/* Pelota 3 - esquina inferior izquierda */
-@keyframes bounce3 {
-  0%   { transform: translate(0, 90vh); }       /* esquina izquierda-sur */
-  25%  { transform: translate(30vw, 70vh); }
-  50%  { transform: translate(50vw, 20vh); }
-  75%  { transform: translate(10vw, 40vh); }
-  100% { transform: translate(0, 90vh); }
-}
 
 
-.ball1 { animation: bounce1 10s infinite linear; }
-.ball2 { animation: bounce2 12s infinite linear; }
-.ball3 { animation: bounce3 14s infinite linear; }
+.fade-in { opacity: 0; transition: opacity 0.8s ease, transform 0.8s ease;}
 
-.fade-in {
-  opacity: 0;
- 
-  transition: opacity 0.8s ease, transform 0.8s ease;
-}
+.fade-in.show { opacity: 1;}
 
-.fade-in.show {
-  opacity: 1;
- 
-}
 /* Transición suave para todos los textos e iconos */
 h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   transition: color 0.4s ease;
 }
 
-/* fade-in inicial */
 
-/*****************SECTION3* PROJECTS************/
+
+/*=====================SECTION 2=========================*/
+.semi-circle {
+  position: absolute;
+ 
+         /* ocupa el 100% de la columna */
+  aspect-ratio: 1;    /* mantiene proporción cuadrada */
+  border-radius: 50%; /* círculo completo, o ajusta para semicirculo */
+  border: 3px solid rgba(255,255,255,0.6);
+  background-color: rgba(255,255,255,0.1);
+  backdrop-filter: blur(5px);
+  object-fit: cover;  /* si usas imagen, para que no se deforme */
+  border-radius: 0 50 50% 50%; /* semicirculo derecho vertical */
+}
+.separator {
+  color: aliceblue;
+  width: 50%;
+    height: 2px;
+    margin: 20px auto;
+  }
+
+.semi-circle.right {
+   /* mitad del alto de la columna para vertical */
+   width: 40%; 
+   top: 0;
+   left: 10%;
+margin-right: -50%;
+}
+
+.semi-circle.left {
+  width: 20%; 
+  margin-left: -50%;
+  bottom: 20%;
+  right: 10%;
+ 
+}
+.semi-circle:hover{
+  background-color: none;
+  backdrop-filter: none;
+}
+
+
+.semi-circle.explode {
+  animation: explode 0.5s forwards;
+}
+
+/* Contenedor para semicirculos en móvil */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column !important;
+    text-align: center;
+  }
+
+  .separator {
+    width: 50%;
+    height: 2px;
+    margin: 20px auto;
+  }
+
+  .col-md-6.d-flex {
+    display: flex;
+    justify-content: center;
+    gap: 0; /* se tocan para parecer un círculo */
+  }
+  .semi-circle.right {
+   /* mitad del alto de la columna para vertical */
+   width: 0%; 
+   top: 0;
+   left: 0;
+margin-right: -50%;
+}
+
+.semi-circle.left {
+  width: 0%; 
+  margin-left: -50%;
+  bottom: 0;
+  right: 0;
+ 
+}
+
+}
+
+/*========================SECTION3* PROJECTS=======================*/
 
 
 #projectsGrid {
@@ -462,8 +495,6 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 }
 
 
-
-
 #distortion {
   position: fixed;
   top: 0;
@@ -484,4 +515,61 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   transform: translate(-50%, -50%);
   opacity: 0;
   transition: opacity 0.2s ease;
+}
+
+/* Pelota que rebota y hace blur al contenido debajo */
+.bouncing-ball {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  z-index: 9999;
+  border: 3px solid rgba(255, 255, 255, 0.6); /* color y grosor */
+  /* Fondo semitransparente para que se vea el blur */
+  background-color: rgba(255,255,255,0.1);
+  /* El truco: blur al contenido que está detrás */
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  pointer-events: auto; /* no bloquea clicks */
+}
+
+/* Rebote simple */
+/* Pelota 1 - esquina superior izquierda */
+@keyframes bounce1 {
+  0%   { transform: translate(0, 0); }           /* esquina izquierda-norte */
+  25%  { transform: translate(70vw, 20vh); }
+  50%  { transform: translate(60vw, 70vh); }
+  75%  { transform: translate(10vw, 60vh); }
+  100% { transform: translate(0, 0); }
+}
+
+/* Pelota 2 - esquina inferior derecha */
+@keyframes bounce2 {
+  0%   { transform: translate(90vw, 90vh); }     /* esquina derecha-sur */
+  25%  { transform: translate(50vw, 70vh); }
+  50%  { transform: translate(60vw, 20vh); }
+  75%  { transform: translate(80vw, 60vh); }
+  100% { transform: translate(90vw, 90vh); }
+}
+
+/* Pelota 3 - esquina inferior izquierda */
+@keyframes bounce3 {
+  0%   { transform: translate(0, 90vh); }       /* esquina izquierda-sur */
+  25%  { transform: translate(30vw, 70vh); }
+  50%  { transform: translate(50vw, 20vh); }
+  75%  { transform: translate(10vw, 40vh); }
+  100% { transform: translate(0, 90vh); }
+}
+
+.ball1 { animation: bounce1 10s infinite linear; }
+.ball2 { animation: bounce2 12s infinite linear; }
+.ball3 { animation: bounce3 14s infinite linear; }
+
+/* to explode bubles*/
+@keyframes explode {
+  0% {    transform: scale(1) rotate(0deg);    opacity: 1;  }
+  100% {
+    transform: scale(2) rotate(30deg);    opacity: 0;  }
 }

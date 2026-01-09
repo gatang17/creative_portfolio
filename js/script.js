@@ -122,9 +122,7 @@ window.addEventListener('load', () => {
   const pHome = document.getElementById("pHome");
   const GIF_DURATION = 15000;
   const section1 = document.getElementById("section1");
-  
-  
-  
+    
  logo.src = `images/bigLogo.gif?${new Date().getTime()}`;
   headerMenu.style.display = "none";
   pHome.style.display = "none";
@@ -446,3 +444,54 @@ const observer2 = new IntersectionObserver(entries => {
 }, { threshold: 0.5 });
 
 observer2.observe(section1);
+
+//=================BUBBLES EXPLOTING=================
+document.querySelectorAll('.bouncing-ball').forEach(ball => {
+  ball.addEventListener('click', () => {
+    const rect = ball.getBoundingClientRect();
+    const x = rect.left;
+    const y = rect.top;
+
+    //  Congelar la bola EXACTAMENTE donde está
+    ball.style.transition = 'none';
+    ball.style.position = 'fixed';
+    ball.style.left = `${x}px`;
+    ball.style.top = `${y}px`;
+    ball.style.transform = 'scale(1)';
+    
+    // Forzar reflow (CLAVE)
+    ball.getBoundingClientRect();
+
+    // Explosión abrupta
+    const randomRotate = Math.random() * 360;
+    const randomX = (Math.random() - 0.5) * 200;
+    const randomY = (Math.random() - 0.5) * 200;
+
+    requestAnimationFrame(() => {
+      ball.style.transition = 'transform 0.25s cubic-bezier(.2,.9,.3,1), opacity 0.25s';
+      ball.style.transform = `
+        translate(${randomX}px, ${randomY}px)
+        scale(4)
+        rotate(${randomRotate}deg)
+      `;
+      ball.style.opacity = '0';
+    });
+
+    // 3️⃣ Eliminar
+    setTimeout(() => {
+      ball.remove();
+    }, 250);
+  });
+});
+
+//================== BUBLES EN SECTION 2
+
+document.querySelectorAll('.semi-circle').forEach(circle => {
+  circle.addEventListener('click', () => {
+    circle.classList.add('explode'); // agrega la animación
+    // opcional: quitar del DOM después de la animación
+    setTimeout(() => {
+      circle.style.display = 'none';
+    }, 500); // coincide con la duración de la animación
+  });
+});
