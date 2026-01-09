@@ -49,7 +49,7 @@ body {
   text-align: left;
   padding-left: 25px;
   font-weight: 700; 
-  font-size: clamp(5rem, 15vw, 8rem);
+  font-size: clamp(5rem, 50vw, 15rem);
 
 }
 
@@ -136,7 +136,7 @@ h1 {
 .pHome {
   padding-right: 1rem;
   position: absolute;
-  bottom: 20%;
+  bottom: 35%;
   left: 50%;
   text-align: right;
   max-width: 50%;          /* parte desde el centro */
@@ -222,7 +222,14 @@ footer {
 @media (max-width: 768px) {
   /* MOBILE FIRST --------------------------------------------*/
 
-
+  #section1Text {
+  
+    text-align: left;
+    padding-left: 25px;
+    font-weight: 700; 
+    font-size: clamp(5rem, 15vw, 8rem);
+  
+  }
 #menu_hamburguer {
   visibility: visible;
 }
