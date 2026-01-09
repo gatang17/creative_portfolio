@@ -138,16 +138,17 @@ h1 {
   position: absolute;
   bottom: 20%;
   left: 50%;
-
   text-align: right;
   max-width: 50%;          /* parte desde el centro */
-  z-index: 1;
- 
+  z-index: 1; 
   overflow-wrap: normal;
   word-break: normal;
   text-align: right;
   justify-content: end;
- 
+  font-family: "Fira Sans Condensed", sans-serif;
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2vw, 1.5rem); /* más legible en móviles */
+  transition: letter-spacing 0.5s, color 0.5s, background 0.5s;
 }
 
 
