@@ -239,10 +239,6 @@ footer {
   
 }
 
-#foot_bar {
-  border-top: #ffffff8f solid;
-}
-
 /* ELEMENTOS BORROSOS POR DEFECTO */
 .borroso {
   filter: none;
@@ -254,9 +250,6 @@ footer {
 }
 #h1ContainerIntro {
   margin-left: -10rem; /* ajusta posición en móvil */
-}
-.bouncing-ball{
-  z-index: -10!important;
 }
 
 }
