@@ -46,7 +46,7 @@ body {
 
 #section1Text {
   text-align: left;
-  padding: 25px;
+  padding-left: 25px;
   font-weight: 700; 
   font-size: clamp(5rem, 15vw, 8rem);
 
@@ -245,12 +245,7 @@ footer {
 }
 
 
-#divLogoIntro img {
-  max-width: 60%; /* se reduce para caber en pantalla */
-}
-#h1ContainerIntro {
-  margin-left: -10rem; /* ajusta posición en móvil */
-}
+
 
 }
 
