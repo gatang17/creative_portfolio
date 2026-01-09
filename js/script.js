@@ -115,98 +115,114 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 // ================= INTRO ANIMATION =================
 
 window.addEventListener('load', () => {
-  
-  const intro = document.getElementById("intro");
-  const logo = document.getElementById('imgLogoIntro');
+
   const headerMenu = document.getElementById("header");
   const pHome = document.getElementById("pHome");
-  const GIF_DURATION = 15000;
   const section1 = document.getElementById("section1");
-    
- logo.src = `images/bigLogo.gif?${new Date().getTime()}`;
+
+  // Ocultar todo al inicio
   headerMenu.style.display = "none";
   pHome.style.display = "none";
-  document.getElementById("section1").style.display = "none";
- 
- let introFinished = false;
+  section1.style.display = "none";
 
-  const finishIntro = () => {
-   if (introFinished) return;
-   introFinished = true;
- clearTimeout(introTimeout);
+  // Mostrar section1
+  section1.style.display = "block";
 
-   intro.style.display = "none";
-    document.getElementById("section1").style.display = "block";
-  
-   if (typeof menuState.updateUI === "function") menuState.updateUI();
+  // Si existe updateUI
+  if (typeof menuState.updateUI === "function") menuState.updateUI();
 
-    // Typewriter for section1 text
-    typeWriterWords(
-      document.getElementById("section1Text"),
-      document.getElementById("section1Text").textContent,
-      350,
-      () => {
-        // Show header and pHome
-        headerMenu.style.display = "block";
-        pHome.style.display = "block";
-        window.scrollTo({ top: section1.offsetTop, behavior: "auto" });
-        headerMenu.classList.add("show");
-        pHome.classList.add("show");
-       requestAnimationFrame(() => {
-          headerMenu.classList.add("show");
-          pHome.classList.add("show");
-        });
+  // Ejecutar typewriter con fade-in usando tu CSS
+  typeWriterWords(
+    document.getElementById("section1Text"),
+    document.getElementById("section1Text").textContent,
+    350, // velocidad entre palabras
+    () => {
+      // Mostrar header y pHome después de la animación
+      headerMenu.style.display = "block";
+      pHome.style.display = "block";
 
-        // Show section2 & section3
-        ["section2","section3"].forEach(id => {
-          const sec = document.getElementById(id);
-          sec.style.display = "block";
-         
-          setTimeout(() => sec.classList.add("show"), 200);
-        });
+      headerMenu.classList.add("show");
+      pHome.classList.add("show");
 
-        hoverWords("section1Text", "Graphic web design");
-        pHomeEffect(); // start word highlight
-      }
-    );
-  };
+      // Mostrar secciones 2 y 3
+      ["section2", "section3"].forEach(id => {
+        const sec = document.getElementById(id);
+        sec.style.display = "block";
+        setTimeout(() => sec.classList.add("show"), 200);
+      });
 
-const introTimeout = setTimeout(finishIntro, GIF_DURATION);
+      // Otros efectos
+      hoverWords("section1Text", "Graphic web design");
+      pHomeEffect();
+    }
+  );
 
-  // Skip intro
-  const tooltip = document.getElementById("skipTooltip");
-  logo.addEventListener("mouseenter", () => { tooltip.textContent = "Skip Animation"; tooltip.style.visibility = "visible"; tooltip.style.opacity = 1; });
-  logo.addEventListener("mouseleave", () => { tooltip.style.opacity = 0; setTimeout(() => tooltip.style.visibility = "hidden", 200); });
-  logo.addEventListener("mousemove", e => { tooltip.style.left = e.clientX + 15 + "px"; tooltip.style.top = e.clientY + 15 + "px"; });
-  logo.addEventListener("click", () => { tooltip.style.visibility = "hidden"; tooltip.style.opacity = 0; finishIntro(); });
 });
 
 
-
-// ================= TYPEWRITER WORDS =================
-function typeWriterWords(el, txt, speed = 250, onComplete) {
- 
-  el.style.opacity = "1";
+// ================= TYPEWRITER PALABRA POR PALABRA =================
+function typeWriterWords(el, txt, speed = 350, onComplete) {
+  el.style.opacity = "1"; // asegurar visibilidad del contenedor
   el.textContent = "";
   const words = txt.split(" ");
   let i = 0;
-  (function write() {
+
+  function writeNextWord() {
     if (i < words.length) {
-      
       const span = document.createElement("span");
       span.textContent = words[i] + " ";
-      span.style.opacity = "0";
-      span.style.transition = "opacity 0.8s ease";
+      span.classList.add("fade-in"); // usa tu CSS
+
       el.appendChild(span);
-      void span.offsetWidth;
-      span.style.opacity = "1";
+
+      // Forzar render y luego agregar show para la transición
+      requestAnimationFrame(() => {
+        span.classList.add("show");
+      });
+
       i++;
-      setTimeout(write, speed);
-      
-    } else if (typeof onComplete === "function") onComplete();
+      setTimeout(writeNextWord, speed);
+    } else if (typeof onComplete === "function") {
+      onComplete();
+    }
   }
-)();
+
+  writeNextWord();
 }
+
+
+// ================= PHOME WORD HIGHLIGHT EFFECT =================
+function pHomeEffect() {
+  const pT = document.getElementById("pHome");
+  if(!pT) return;
+
+  const words = pT.textContent.split(" ");
+  pT.textContent = "";
+  const spans = words.map(word => {
+    const span = document.createElement("span");
+    span.textContent = word;
+    span.classList.add("word");
+    span.dataset.baseColor = ""; // se puede usar dinámicamente
+    pT.appendChild(span);
+    pT.appendChild(document.createTextNode(" "));
+    return span;
+  });
+
+  let index = 0;
+  setInterval(() => {
+    const sectionColor = getCurrentSectionColor(); // color de sección actual
+    spans.forEach(span => { 
+      span.classList.remove("active"); 
+      span.style.color = "#ffffff"; // color por defecto
+      span.dataset.baseColor = "#ffffff";
+    });
+    spans[index].classList.add("active");
+    spans[index].style.color = sectionColor; // color resaltado
+    index = (index + 1) % spans.length;
+  }, 500);
+}
+
+
 
 
 // ================= PHOME WORD HIGHLIGHT EFFECT =================
@@ -267,7 +283,13 @@ function changeElementColors(bgColor) {
   });
 
   const footer = document.getElementById("foot_bar");
-  if(footer) footer.style.borderTop = `2px solid ${textColor}`;
+  if (footer) {
+    //footer.style.borderTop = `2px solid ${textColor}`;
+   // footer.style.backgroundColor = "rgba(200, 200, 200, 0.2)"; // semitransparente
+    footer.style.backdropFilter = "blur(10px)";
+    footer.style.webkitBackdropFilter = "blur(10px)"; // Safari
+  }
+  
 }
 
 function updateColors() {

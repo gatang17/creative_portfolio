@@ -24,17 +24,105 @@
       </head>
       
       <body id="bdyIndex">
- 
+ <!-- Loading Screen -->
+<div id="loading">
+  <div class="progress-container">
+    <div class="progress-bar" id="progress-bar"></div>
+    <span id="progress-text">0%</span>
+  </div>
+</div>
+<style>
+  /* Pantalla completa de loading */
+/* Pantalla completa de loading */
+#loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #dadada; /* fondo claro */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10999;
+  flex-direction: column;
+  font-family: sans-serif;
+}
+
+/* Contenedor de la barra */
+.progress-container {
+  width: 80%;
+  max-width: 500px;
+  height: 20px;
+  background-color: #dadada; /* fondo de la barra igual al fondo */
+  border-radius: 10px;
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 10px;
+  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+}
+
+/* Barra que crece */
+.progress-bar {
+  width: 0%;
+  height: 100%;
+  background-color: #252525; /* barra oscura */
+  border-radius: 10px;
+  transition: width 0.2s ease;
+}
+
+/* Texto del % */
+#progress-text {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  top: 0;
+  left: 0;
+  line-height: 20px; /* mismo que la altura de la barra */
+  color: #ffffff; /* texto oscuro para que se vea sobre fondo claro */
+  font-weight: bold;
+  pointer-events: none; /* que no bloquee clicks si hay algo debajo */
+  mix-blend-mode: exclusion;
+
+}
+
+</style>
+<script>
+  // Seleccionar elementos
+const progressBar = document.getElementById('progress-bar');
+const progressText = document.getElementById('progress-text');
+const loadingScreen = document.getElementById('loading');
+
+// Simular carga de página
+let progress = 0;
+
+// Cada 30ms aumenta el % (simula carga)
+const loadingInterval = setInterval(() => {
+  progress += Math.random() * 5; // aumenta aleatoriamente para que se vea más natural
+  if (progress > 100) progress = 100;
+
+  progressBar.style.width = progress + '%';
+  progressText.textContent = Math.floor(progress) + '%';
+
+  if (progress >= 100) {
+    clearInterval(loadingInterval);
+    // Ocultar loading después de un momento
+    setTimeout(() => {
+      loadingScreen.style.display = 'none';
+    }, 300);
+  }
+}, 30);
+
+// Alternativa: si quieres vincularlo a la carga real
+// window.addEventListener('load', () => {
+//   loadingScreen.style.display = 'none';
+// });
+
+</script>
 <!-- header -->
 
 <div id="header" class="fade-in" style="height: 10vh; "></div>
 
-<!-- Intro animado -->
-<div id="intro" style="position: fixed; top:0; left:0; width:100%; height:100%; display:flex; justify-content:center; align-items:center; z-index:10000;">
-    <div style="position: relative; display:inline-block;">
-    <img id="imgLogoIntro"  style="max-width: auto; max-height: 100vh; width:auto; height:auto; cursor:pointer;">
-    </div>
-</div>
 
 <div id="skipTooltip" style="  position: fixed;    pointer-events: none;    background-color: rgba(92, 92, 94, 0.331);    color: white;    padding: 4px 8px;    border-radius: 4px;   font-size: 0.9rem;    visibility: hidden;    opacity: 0;    z-index: 100000;    transition: opacity 0.2s;"></div>
 

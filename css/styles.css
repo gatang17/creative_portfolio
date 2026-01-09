@@ -37,7 +37,7 @@ body {
 
 #section3{ 
   position: relative;
-  padding-top: 5%;
+
   padding-bottom: 10%;
   background-color: #252525;
   height: 100VH;
@@ -116,7 +116,7 @@ h1 {
   }
 
  h3{
-  padding-top: 5rem;
+  padding-top: 2rem;
    font-family: "Fira Sans Condensed", sans-serif;
    font-weight: 600;
    font-style: normal;
