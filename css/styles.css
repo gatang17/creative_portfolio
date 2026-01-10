@@ -136,7 +136,7 @@ h1 {
 .pHome {
   padding-right: 1rem;
   position: absolute;
-  bottom: 35%;
+  bottom: 30%;
   left: 50%;
   text-align: right;
   max-width: 50%;          /* parte desde el centro */

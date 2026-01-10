@@ -499,7 +499,7 @@ document.querySelectorAll('.bouncing-ball').forEach(ball => {
       ball.style.opacity = '0';
     });
 
-    //  Eliminar
+    // 3️⃣ Eliminar
     setTimeout(() => {
       ball.remove();
     }, 250);
