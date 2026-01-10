@@ -13,6 +13,7 @@ body {
 /*menu hamburguer icon*/
 .fas{
   color: #252525;
+  font-size: 2em;
 }
 
 
@@ -252,7 +253,9 @@ footer {
   filter: none;
 }
 
-
+i{
+  font-size: 1.5em;
+}
 
 
 }
