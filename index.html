@@ -23,172 +23,176 @@
         <link rel="stylesheet" href="css/styles.css" />
       </head>
       
-      <body id="bdyIndex">
- <!-- Loading Screen -->
-<div id="loading">
-  <div class="progress-container">
-    <div class="progress-bar" id="progress-bar"></div>
-    <span id="progress-text">0%</span>
+      <body>
+
+  <!-- PRELOADER -->
+  <div id="loading">
+    <div class="progress-container">
+      <div class="progress-bar" id="progress-bar"></div>
+      <span id="progress-text">0%</span>
+    </div>
   </div>
-</div>
-<style>
-  /* Pantalla completa de loading */
-/* Pantalla completa de loading */
-#loading {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: #dadada; /* fondo claro */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10999;
-  flex-direction: column;
-  font-family: sans-serif;
-}
 
-/* Contenedor de la barra */
-.progress-container {
-  width: 80%;
-  max-width: 500px;
-  height: 20px;
-  background-color: #dadada; /* fondo de la barra igual al fondo */
-  border-radius: 10px;
-  overflow: hidden;
-  position: relative;
-  margin-bottom: 10px;
-  box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
-}
-
-/* Barra que crece */
-.progress-bar {
-  width: 0%;
-  height: 100%;
-  background-color: #252525; /* barra oscura */
-  border-radius: 10px;
-  transition: width 0.2s ease;
-}
-
-/* Texto del % */
-#progress-text {
-  position: absolute;
-  width: 100%;
-  text-align: center;
-  top: 0;
-  left: 0;
-  line-height: 20px; /* mismo que la altura de la barra */
-  color: #ffffff; /* texto oscuro para que se vea sobre fondo claro */
-  font-weight: bold;
-  pointer-events: none; /* que no bloquee clicks si hay algo debajo */
-  mix-blend-mode: exclusion;
-
-}
-
-</style>
-<script>
-  // Seleccionar elementos
-const progressBar = document.getElementById('progress-bar');
-const progressText = document.getElementById('progress-text');
-const loadingScreen = document.getElementById('loading');
-
-// Simular carga de página
-let progress = 0;
-
-// Cada 30ms aumenta el % (simula carga)
-const loadingInterval = setInterval(() => {
-  progress += Math.random() * 5; // aumenta aleatoriamente para que se vea más natural
-  if (progress > 100) progress = 100;
-
-  progressBar.style.width = progress + '%';
-  progressText.textContent = Math.floor(progress) + '%';
-
-  if (progress >= 100) {
-    clearInterval(loadingInterval);
-    // Ocultar loading después de un momento
-    setTimeout(() => {
-      loadingScreen.style.display = 'none';
-    }, 300);
-  }
-}, 30);
-
-// Alternativa: si quieres vincularlo a la carga real
-// window.addEventListener('load', () => {
-//   loadingScreen.style.display = 'none';
-// });
-
-</script>
 <!-- header -->
 
-<div id="header" class="fade-in" style="height: 10vh; "></div>
+<main class="juice-site">
 
+  <!-- HERO -->
+  <section id="section1" class="hero-section borroso">
+    <div class="container hero-container">
+      <div class="hero-text fade-up">
+        <img src="img/logo.png" alt="JuicySplash logo" class="hero-logo">
+        <span class="hero-badge">100% Natural • Freshly Pressed</span>
+        <h1 id="section1Text">
+          Taste the <span>Tropical</span> Energy.
+        </h1>
+        <p id="pHome" class="hero-copy">
+          Cold, bright, and bursting with natural goodness. Just fruit-forward flavor, refreshing energy, and colors that feel like summer in a bottle.
+        </p>
 
-
-
-<main >
-    <section id="section1">
-       <div class="row">       
-       
-          <div class="col">  <h1 id="section1Text" > Focus Net Forge </h1></div>     
-          <div class="col"><p id="pHome" class="pHome"> We craft websites to fit every need, customized for the problem at hand.</p></div>
-      
-       </div>
- <div class="bouncing-ball ball1"></div>
-<div class="bouncing-ball ball2"></div>
-<div class="bouncing-ball ball3"></div>
-    </section>
-
-
-    <!--SECTIO 2 ABOUT-->
-      <section id="section2"  class="fade-in" style="display: none;">
-     <!-- <h3 id="h3Text" class="title-animate">Who We Are</h3>-->  
-
-        <div class="container about-section ">
-          <!-- Row 1 -->
-          <div class="row align-items-center mb-5">
-            <div class="col-md-5 text-box mt-5 py-5">
-              <h2>Who We Are</h2>
-              <p>
-                At Focus Net Forge, we are a creative team dedicated to building websites that reflect each client’s vision and goals. We work with pre-designed platforms like WordPress or Squarespace for fast and efficient solutions, or we can create fully custom websites using HTML, CSS, and JavaScript—tailored to exactly what our clients want to showcase online.  </p>
-            </div>
-            <div class="col-md-1 d-flex justify-content-center">
-              <div class="separator"></div>
-            </div>
-            <div class="col-md-6 d-flex justify-content-center ">
-              <div class="semi-circle right"></div>
-            </div>
-          </div>
-        
-          <!-- Row 2 -->
-          <div class="row align-items-center">
-            <div class="col-md-6 d-flex justify-content-center">
-              <div class="semi-circle left"></div>
-            </div>
-            <div class="col-md-1 d-flex justify-content-center">
-              <div class="separator"></div>
-            </div>
-            <div class="col-md-5 text-box">
-              <h2>Our Full-Service Approach</h2>
-              <p>
-                But we don’t stop at websites. Our team also includes photographers and graphic designers, allowing us to go beyond just building a tool. We can help create a full brand identity, capture professional photos of your business or products, and design print materials like business cards and flyers. In short, we offer a complete, end-to-end solution for your online and offline presence. </p>
-            </div>
-          </div>
+        <div class="hero-buttons">
+          <a href="#shop" class="btn-hero btn-dark">Order Now</a>
+          <a href="#section2" class="btn-hero btn-light">Why Us</a>
         </div>
-        
-<script>
+      </div>
+  
+    </div>
 
-</script>
+    <div class="bouncing-ball ball1"></div>
+    <div class="bouncing-ball ball2"></div>
+    <div class="bouncing-ball ball3"></div>
+  </section>
 
-      </section>
+  <!-- WHY US -->
+  <div class="ticker">
+    <div class="ticker-track">
+  
+      <span>No Added Sugar — Clean taste that lets the fruit do the work.</span>
+      <span>Freshly Made — Bright, colorful and tropical.</span>
+      <span>Sustainable — Better choices for everyday refreshment.</span>
+  
+      <!-- DUPLICADO para loop infinito -->
+      <span>No Added Sugar — Clean taste that lets the fruit do the work.</span>
+      <span>Freshly Made — Bright, colorful and tropical.</span>
+      <span>Sustainable — Better choices for everyday refreshment.</span>
+  
+    </div>
+  </div>
+  <section id="section2" class="feature-section borroso">
+     <div class="about-bubble about-bubble--1"></div>
+    <div class="about-bubble about-bubble--2"></div>
+    <div class="container feature-grid">
+    </div>
+   
+    
+  </section>
 
-      <section id="section3"  class="fade-in" style="display: none;">
-        <h3 id="h3Projects" class="title-animate"> projects</h3>
-        <div id="projectsGrid"></div>
-         
-      </section>
+  <!-- SHOP -->
+  <section id="shop" class="shop-section borroso">
+
+    
+    <div class="container section-intro">
+      <h2>Pick Your <span>Flavor</span></h2>
+      <p>Products below are loaded dynamically from JSON.</p>
+    </div>
+
+    <div class="container">
+      <div id="productGrid" class="product-grid"></div>
+    </div>
+
+
+  </section>
+
+  <!-- LIFESTYLE -->
+  <section class="lifestyle-section borroso">
+    <div class="container section-intro text-center">
+      <h2>Live <span>Juicy</span></h2>
+    </div>
+
+    <div class="container lifestyle-grid">
+      <div class="lifestyle-photo fade-up">
+        <!-- PLACEHOLDER LIFESTYLE -->
+        <img src="img/allfruits.png" alt="Lifestyle image placeholder">
+      </div>
+
+      <div class="lifestyle-quote fade-up delay-1">
+        <p>Sip<br>The<br>Sun</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NUTRITION -->
+  <section id="nutrition" class="nutrition-section borroso">
+    <div class="container section-intro text-center">
+      <h2>Nothing to <span>Hide</span></h2>
+      <p>Nutrition info comes from the same product JSON.</p>
+    </div>
+
+    <div class="container">
+      <div id="nutritionGrid" class="nutrition-grid"></div>
+    </div>
+  </section>
+
+  <!-- FIND US -->
+  <section id="find-us" class="find-section borroso">
+    <div class="container find-grid">
+      <div class="find-copy">
+        <h2>Find Us <span>Near You</span></h2>
+        <p>Grab a bottle at one of our local partner spots.</p>
+      </div>
+
+      <div class="store-list">
+        <div class="store-item"><span>Sunshine Grocer</span><a href="#">Directions</a></div>
+        <div class="store-item"><span>Earth Market</span><a href="#">Directions</a></div>
+        <div class="store-item"><span>Palm Daily Market</span><a href="#">Directions</a></div>
+        <div class="store-item"><span>Juicy Café Bar</span><a href="#">Directions</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- REVIEWS -->
+  <section class="review-section borroso">
+    <div class="container section-intro text-center">
+      <h2>Juicy Love</h2>
+    </div>
+
+    <div class="container review-grid">
+      <article class="review-card fade-up">
+        <p>“The mango one feels sunny and fresh. Super clean flavor.”</p>
+        <strong>Sara L.</strong>
+      </article>
+
+      <article class="review-card fade-up delay-1">
+        <p>“The guava blend is bright, smooth, and really refreshing.”</p>
+        <strong>Nicole T.</strong>
+      </article>
+      
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section borroso">
+    <div class="container">
+      <div class="contact-card fade-up">
+        <img src="img/logo.png" alt="logo" class="contact-logo">
+        <h2>Say <span>Hello</span></h2>
+        <p>Questions, catering, wholesale, or just want to talk juice?</p>
+
+        <form class="contact-form">
+          <div class="form-row">
+            <input type="text" placeholder="Your Name">
+            <input type="email" placeholder="Email Address">
+          </div>
+          <textarea placeholder="Write your message"></textarea>
+          <button type="submit" class="btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+    
+  </section>
 </main>
 
+<div id="header" class="fade-in" style="height: 10vh; "></div>
     
          <!-- Bootstrap Bundle JS (Popper incluido) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
