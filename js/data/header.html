@@ -7,29 +7,21 @@
     <a href="#nutrition" class="lnkMenu">NUTRITION</a>
     <a href="#find-us" class="lnkMenu">WHERE TO BUY</a>
     <a href="#contact" class="link_log lnkMenu" id="link_log">CONTACT</a>
+    
   </div>
 </div>
 
 <!-- FOOTER / MENU BAR -->
-<footer class="w-100" id="foot_bar">
+<footer class="w-100 borroso" id="foot_bar">
   <div class="row justify-content-left align-items-center w-100">
     <div class="container-fluid" id="menu_container">
       <div class="container_top" id="container_top">
 
         <!-- menu desktop -->
-        <div class="row justify-content-between align-items-center text-center borroso" id="div_menutop">
+        <div class="row justify-content-between align-items-center text-center" id="div_menutop">
 
           <!-- Columna izquierda iconos -->
-          <div class="col-md-4 d-flex justify-content-center">
-            <div class="d-flex gap-2">
-              <a href="https://www.instagram.com/grey_dpa/" target="_blank">
-                <i class="fab fa-instagram"></i>
-              </a>
-              <a href="https://github.com/gatang17" target="_blank">
-                <i class="fa-brands fa-github-alt"></i>
-              </a>
-            </div>
-          </div>
+       
 
           <!-- Columna del medio vacía -->
           <div class="col-md-2 d-flex justify-content-center" id="div_menu">
@@ -45,29 +37,45 @@
               <a href="#nutrition">NUTRITION</a>
               <a href="#find-us">WHERE TO BUY</a>
               <a href="#contact" class="link_log" id="link_log2">CONTACT</a>
+              
             </div>
           </div>
 
         </div>
       </div>
     </div>
+    
   </div>
 
   <!-- barra mobile -->
   <div class="d-flex align-items-center justify-content-between w-100">
     <!-- Social icons -->
-    <div id="div_menubotom" class="d-flex me-3">
-      <a href="https://www.instagram.com/grey_dpa/" target="_blank">
-        <i class="fab fa-instagram"></i>
-      </a>
-      <a href="https://github.com/gatang17" target="_blank">
-        <i class="fa-brands fa-github-alt"></i>
-      </a>
-    </div>
 
     <!-- Hamburger -->
     <div id="menu_hamburguer" class="d-flex">
       <i class="fas fa-bars btn"></i>
     </div>
   </div>
+ <!-- barra mobile -->
+<div class="d-flex align-items-center justify-content-between w-100 px-3">
+
+  <a class="copyright" href="https://gatangdesigns.io/" target="_blank">
+    © <span id="year"></span> GATANG designs. All rights reserved.
+  </a>
+
+  <div id="menu_hamburguer" class="d-flex">
+    <i class="fas fa-bars btn"></i>
+  </div>
+
+</div>
 </footer>
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const year = document.getElementById("year");
+    if (year) year.textContent = new Date().getFullYear();
+  });
+</script>
+
+</body>
