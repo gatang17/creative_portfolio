@@ -2,13 +2,13 @@
   "products": [
     {
       "id": 1,
-      "name": "Tropical Mango Blast",
-      "slug": "tropical-mango-blast",
+      "name": "Tropical Mango",
+      "slug": "tropical-mango",
       "price": 5.99,
       "currency": "USD",
       "theme": "mango",
       "badge": "Mango",
-      "subtitle": "Fresh & Sunny",
+      "subtitle": "Sweet & Tropical",
       "image": "img/mango.png",
       "nutrition": {
         "calories": 130,
@@ -19,12 +19,12 @@
     },
     {
       "id": 2,
-      "name": "Guava Berry Splash",
-      "slug": "guava-berry-splash",
+      "name": "Pink Guava",
+      "slug": "pink-guava",
       "price": 6.49,
       "currency": "USD",
       "theme": "guava",
-      "badge": "Guava Berry",
+      "badge": "Guava",
       "subtitle": "Bright & Juicy",
       "image": "img/guava.png",
       "nutrition": {
@@ -35,23 +35,21 @@
       }
     },
     {
-      
-        "id": 3,
-        "name": "Passion Fruit Fusion",
-        "slug": "passion-fruit-fusion",
-        "price": 6.99,
-        "currency": "USD",
-        "theme": "passion",
-        "badge": "Passion Fruit",
-        "subtitle": "Tropical & Tangy",
-        "image": "img/pasionF.png",
-        "nutrition": {
-          "calories": 95,
-          "totalSugar": "6g",
-          "vitaminC": "30% DV",
-          "fiber": "22% DV"
-        }
-      
+      "id": 3,
+      "name": "Cool Lime",
+      "slug": "cool-lime",
+      "price": 4.99,
+      "currency": "USD",
+      "theme": "lime",
+      "badge": "Lime",
+      "subtitle": "Fresh & Zesty",
+      "image": "img/lemon.png",
+      "nutrition": {
+        "calories": 90,
+        "totalSugar": "6g",
+        "vitaminC": "40% DV",
+        "fiber": "8% DV"
+      }
     }
   ]
 }

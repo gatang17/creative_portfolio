@@ -271,8 +271,8 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   background:
     linear-gradient(
       to right,
-      rgba(243, 227, 143, 0.85),
-      rgba(206, 223, 146, 0.7)
+      rgba(243, 226, 143, 0.592),
+      rgba(206, 223, 146, 0.21)
     ),
     url("../img/hero.png");
 
@@ -512,8 +512,8 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 }
 
 .product-thumb img {
-  max-height: 170px;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
 }
 
 .product-meta {
@@ -521,6 +521,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   display: flex;
   gap: .45rem;
   flex-wrap: wrap;
+ 
 }
 
 .product-chip {
@@ -563,7 +564,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   border-radius: 50%;
 }
 
-.product-card.mango .product-thumb { background: #f6e9a6; }
+/* .product-card.mango .product-thumb { background: #f6e9a6; }
 .product-card.mango .product-dot { background: #f0b600; }
 
 .product-card.guava .product-thumb { background: #f2d7e5; }
@@ -571,7 +572,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 
 .product-card.passion .product-thumb {  background: #f7d96b; }
 
-.product-card.passion .product-dot {  background: #e0a800;}
+.product-card.passion .product-dot {  background: #e0a800;} */
 
 /* LIFESTYLE */
 .lifestyle-section {
@@ -706,30 +707,115 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 
 /* REVIEWS */
 .review-section {
+  position: relative;
   padding: 5rem 0;
-  background: var(--accent-green-strong);
+  background-image: url("../img/patern.png");
+  overflow: hidden;
+}
+
+
+
+.review-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .review-section h2 {
-  color: #fff4ba;
+  color: #1a2f20;
+  text-align: center;
+  margin-bottom: 2.5rem;
 }
 
-.review-grid {
+/* CAROUSEL */
+.review-carousel {
+  overflow: hidden;
+  width: 100%;
+}
+
+.review-track {
+  display: flex;
+  transition: transform 0.55s ease;
+}
+
+.review-slide {
+  min-width: 100%;
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
 }
 
+/* GLASS CARDS */
 .review-card {
-  background: rgba(255,255,255,.16);
-  border: 1px solid rgba(255,255,255,.22);
-  border-radius: var(--radius-md);
-  padding: 1.5rem;
+  min-height: 180px;
+  padding: 1.6rem;
+  border-radius: 24px;
+
+  background: rgba(20, 55, 25, 0.38);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
   color: #fff7d1;
 }
 
 .review-card p {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: rgba(255, 247, 209, 0.95);
+}
+
+.review-card h4 {
+  margin: 0;
+  color: #ffffff;
+  font-weight: 800;
+}
+
+/* BUTTONS */
+.review-controls {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.review-controls button {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 50%;
+  cursor: pointer;
+
+  background: rgba(255,255,255,0.14);
+  color: #fff4ba;
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  font-size: 1.2rem;
+  font-weight: 700;
+  transition: transform 0.25s ease, background 0.25s ease;
+}
+
+.review-controls button:hover {
+  transform: translateY(-3px);
+  background: rgba(255,255,255,0.24);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .review-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .review-card {
+    min-height: auto;
+  }
+}
+@media (max-width: 768px) {
+  .review-slide {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* CONTACT */
@@ -877,7 +963,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 
 
 /* ABOUT BUBBLES */
-.about-bubble {
+/* .about-bubble {
   position: absolute;
    border-radius: 50%;
   background: var(--glass-bg);
@@ -906,7 +992,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
 .about-bubble:hover{
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
-}
+} */
 
 
 /* =========================
@@ -987,7 +1073,7 @@ h1, h2, h3, h4, h5, h6, p, a, span, i, button {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  background: linear-gradient(to right, rgba(243, 226, 143, 0.456), rgba(206, 223, 146, 0.357)), url(../img/hero.png);
+  
 }
  
 

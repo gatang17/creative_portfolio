@@ -170,26 +170,26 @@ function renderProducts(products) {
   if (!grid) return;
 
   grid.innerHTML = products.map(product => `
-    <article class="product-card ${product.theme} fade-up">
-      <div class="product-meta">
-        <span class="product-chip">${product.badge}</span>
-        <span class="product-chip">${product.subtitle}</span>
-      </div>
-
-      <div class="product-thumb">
-        <img src="${product.image}" alt="${product.name}">
-      </div>
-
-      <div class="product-info">
-        <h3>${product.name}</h3>
-        <p class="product-subtitle">${product.subtitle}</p>
-        <p class="product-price">$${product.price.toFixed(2)}</p>
-      </div>
-
-      <span class="product-dot"></span>
-    </article>
+      <article class="product-card ${product.theme} fade-up">
+          <!-- AQUÍ SE AGREGA EL STYLE INLINE -->
+          <div class="product-meta" >
+              <span class="product-chip" >${product.badge}</span>
+              <span class="product-chip">${product.subtitle}</span>
+          </div>
+          <div class="product-thumb" style="background-image: url('${product.image}'); background-size: cover; background-position: center;">
+              <img src="${product.image}" alt="${product.name}">
+          </div>
+          <div class="product-info">
+              <h3>${product.name}</h3>
+              <p class="product-subtitle">${product.subtitle}</p>
+              <p class="product-price">$${product.price.toFixed(2)}</p>
+          </div>
+          <span class="product-dot"></span>
+      </article>
   `).join("");
 }
+
+
 
 function renderNutrition(products) {
   const grid = document.getElementById("nutritionGrid");
@@ -207,3 +207,28 @@ function renderNutrition(products) {
     </article>
   `).join("");
 }
+
+/* =========================
+   review
+========================= */
+
+const reviewTrack = document.querySelector(".review-track");
+const reviewSlides = document.querySelectorAll(".review-slide");
+const reviewPrev = document.getElementById("reviewPrev");
+const reviewNext = document.getElementById("reviewNext");
+
+let reviewIndex = 0;
+
+function updateReviewCarousel() {
+  reviewTrack.style.transform = `translateX(-${reviewIndex * 100}%)`;
+}
+
+reviewNext.addEventListener("click", () => {
+  reviewIndex = (reviewIndex + 1) % reviewSlides.length;
+  updateReviewCarousel();
+});
+
+reviewPrev.addEventListener("click", () => {
+  reviewIndex = (reviewIndex - 1 + reviewSlides.length) % reviewSlides.length;
+  updateReviewCarousel();
+});
