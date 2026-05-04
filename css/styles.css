@@ -59,7 +59,7 @@ body {
 .nutrition-section,
 .find-section,
 .contact-section {
-  background-image: url("../img/pattern.png");
+  background-image: url("../img/pattern.png")!important;
   background-size: 700px;
   background-repeat: repeat;
   background-blend-mode: multiply;
