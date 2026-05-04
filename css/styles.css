@@ -80,7 +80,7 @@ body {
   position: absolute;
   inset: 0;
 
-  background-image: url("../img/pattern.png");
+  background-image: url("../img/pattern.png")!important;
   background-size: 600px;
   background-repeat: repeat;
 
