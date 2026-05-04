@@ -52,30 +52,18 @@ body {
   background: var(--bg-soft);
   overflow-x: hidden;
 }
-body {
-  position: relative;
-  background-image: url("../img/pattern.png");
-}
 
-body::before {
-  content: "";
-  position: fixed;
-  inset: 0;
-
+.feature-section,
+.shop-section,
+.lifestyle-section,
+.nutrition-section,
+.find-section,
+.contact-section {
   background-image: url("../img/pattern.png");
   background-size: 700px;
   background-repeat: repeat;
-
-  opacity: 0.05; /* 👈 AJUSTA AQUÍ */
-  pointer-events: none;
-  z-index: 0;
+  background-blend-mode: multiply;
 }
-
-body > * {
-  position: relative;
-  z-index: 1;
-}
-
 
 img {
   display: block;
