@@ -54,7 +54,7 @@ body {
 }
 body {
   position: relative;
-  background-color: #ffffff; /* tu color base */
+  background-image: url("../img/pattern.png");
 }
 
 body::before {
