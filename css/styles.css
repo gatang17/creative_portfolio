@@ -53,6 +53,33 @@ body {
   overflow-x: hidden;
 }
 
+body {
+  position: relative;
+  background-color: #fff; /* o tu color base */
+}
+
+/* patrón global */
+body::before {
+  content: "";
+  position: fixed; /* 🔥 clave para que cubra todo */
+  inset: 0;
+
+  background-image: url("img/patern.png");
+  background-size: 600px;
+  background-repeat: repeat;
+
+  opacity: 0.04; /* 👈 súper sutil */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* todo el contenido arriba */
+body > * {
+  position: relative;
+  z-index: 1;
+}
+
+
 img {
   display: block;
   max-width: 100%;
