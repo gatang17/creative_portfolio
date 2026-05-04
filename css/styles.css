@@ -52,28 +52,25 @@ body {
   background: var(--bg-soft);
   overflow-x: hidden;
 }
-
 body {
   position: relative;
-  background-color: #fff; /* o tu color base */
+  background-color: #ffffff; /* tu color base */
 }
 
-/* patrón global */
 body::before {
   content: "";
-  position: fixed; /* 🔥 clave para que cubra todo */
+  position: fixed;
   inset: 0;
 
-  background-image: url("img/patern.png");
-  background-size: 600px;
+  background-image: url("../img/pattern.png");
+  background-size: 700px;
   background-repeat: repeat;
 
-  opacity: 0.04; /* 👈 súper sutil */
+  opacity: 0.05; /* 👈 AJUSTA AQUÍ */
   pointer-events: none;
   z-index: 0;
 }
 
-/* todo el contenido arriba */
 body > * {
   position: relative;
   z-index: 1;
