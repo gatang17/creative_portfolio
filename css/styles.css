@@ -84,21 +84,11 @@ body {
   background-size: 600px;
   background-repeat: repeat;
 
-  opacity: 0.05; /* 👈 AJUSTA */
+  opacity: 0.5; /* 👈 AJUSTA */
   pointer-events: none;
   z-index: 0;
 }
 
-/* Asegurar contenido encima */
-.feature-section > *,
-.shop-section > *,
-.lifestyle-section > *,
-.nutrition-section > *,
-.find-section > *,
-.contact-section > * {
-  position: relative;
-  z-index: 1;
-}
 
 img {
   display: block;
