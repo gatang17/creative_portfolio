@@ -53,16 +53,51 @@ body {
   overflow-x: hidden;
 }
 
+/* =========================
+   GLOBAL BACKGROUND PATTERN
+========================= */
+
+/* Secciones claras con patrón */
 .feature-section,
 .shop-section,
 .lifestyle-section,
 .nutrition-section,
 .find-section,
 .contact-section {
-  background-image: url("../img/pattern.png")!important;
-  background-size: 700px;
+  position: relative;
+  background-size: 600px;
   background-repeat: repeat;
-  background-blend-mode: multiply;
+}
+
+/* Overlay con patrón */
+.feature-section::before,
+.shop-section::before,
+.lifestyle-section::before,
+.nutrition-section::before,
+.find-section::before,
+.contact-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+
+  background-image: url("../img/pattern.png");
+  background-size: 600px;
+  background-repeat: repeat;
+
+  opacity: 0.05; /* 👈 AJUSTA */
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Asegurar contenido encima */
+.feature-section > *,
+.shop-section > *,
+.lifestyle-section > *,
+.nutrition-section > *,
+.find-section > *,
+.contact-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 img {
