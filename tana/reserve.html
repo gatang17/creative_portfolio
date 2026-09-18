@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Reserve — TANA</title>
+  <meta name="description" content="The wait is over. Reserve a table at TANA, 983 Goss Ave, Louisville, KY." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Jost:wght@200;300;400;500&family=Caveat:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="css/tana.css" />
+</head>
+<body>
+
+  <div data-tana-header></div>
+
+  <!-- HERO -->
+  <section class="hero hero--page hero--left hero--flat" style="--photo:url('img/reserve-hero.jpg')">
+    <div class="hero__inner" style="align-items:center;text-align:center">
+      <h1 class="hero__title">The wait is over</h1>
+      <p class="script script--lg hero__script" style="margin:0;align-self:flex-end">Reserve below!</p>
+    </div>
+  </section>
+
+  <!-- RESERVA -->
+  <section class="band band--olive">
+    <div class="shell">
+      <div class="split split--wide reveal">
+        <div class="photo photo--wide" style="--photo:url('img/reserve-dish.jpg')" role="img" aria-label="Dumplings de temporada"></div>
+
+        <form class="booker" onsubmit="return false">
+          <h3>Make a Reservation</h3>
+
+          <label for="b-date">
+            <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+            <span class="sr-only">Fecha</span>
+            <select id="b-date">
+              <option>Today</option>
+              <option>Tomorrow</option>
+              <option>This weekend</option>
+            </select>
+          </label>
+
+          <label for="b-time">
+            <i class="fa-regular fa-clock" aria-hidden="true"></i>
+            <span class="sr-only">Hora</span>
+            <select id="b-time">
+              <option>5:00 PM</option><option>6:00 PM</option><option>7:00 PM</option>
+              <option>8:00 PM</option><option selected>9:30 PM</option>
+            </select>
+          </label>
+
+          <label for="b-party">
+            <i class="fa-regular fa-user" aria-hidden="true"></i>
+            <span class="sr-only">Comensales</span>
+            <select id="b-party">
+              <option>2 people</option><option>3 people</option><option>4 people</option>
+              <option>5 people</option><option>6 people</option>
+            </select>
+          </label>
+
+          <button class="btn btn--book" type="submit">Find a Table</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <div data-tana-footer></div>
+
+  <script src="js/tana.js"></script>
+</body>
+</html>
