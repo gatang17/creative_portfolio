@@ -11,12 +11,12 @@
   --olive-deep:   #4f543f;
   --cream:        #f6f2ea;
   --cream-warm:   #efe9dd;
-  --terracotta:   #c05b41;
-  --terracotta-d: #a94c34;
+  --terracotta:   #a94c34;
+  --terracotta-d: #93402c;
   --ink:          #2a2a22;
   --ink-soft:     #5b5b4f;
   --light:        #f4f0e6;
-  --light-soft:   rgba(244, 240, 230, .78);
+  --light-soft:   rgba(244, 240, 230, .9);
   --rule:         rgba(244, 240, 230, .35);
   --rule-dark:    rgba(42, 42, 34, .14);
 
@@ -553,7 +553,8 @@ h1, h2, h3, h4 {
 :root {
   --font-script: "Caveat", "Segoe Script", cursive;
   --maroon: #7a3b2e;   /* marco de las cartas impresas */
-  --slate:  #8c98a1;   /* banda del formulario de prensa */
+  --slate:  #5e6b74;   /* banda del formulario de prensa: oscurecida para que
+                          el texto crema llegue a 4.82:1 (antes 2.59:1) */
 }
 
 /* ---- Acento manuscrito ---- */
@@ -619,7 +620,9 @@ h1, h2, h3, h4 {
   letter-spacing: .24em;
   text-transform: uppercase;
 }
-.title--terracotta { color: var(--terracotta); }
+/* Solo sobre crema: sobre oliva da 1.6:1 y sobre pizarra 1.3:1. */
+.band--cream .title--terracotta,
+.band--warm .title--terracotta { color: var(--terracotta); }
 
 /* ---- Cartas impresas enmarcadas (página Menu) ---- */
 .sheet-grid {
@@ -727,12 +730,12 @@ h1, h2, h3, h4 {
 }
 .btn--quiet {
   padding: 9px 22px;
-  background: rgba(244, 240, 230, .18);
+  background: rgba(42, 42, 34, .28);
   border: 1px solid var(--rule);
   color: var(--light);
   font-size: .86rem;
 }
-.btn--quiet:hover { background: rgba(244, 240, 230, .3); }
+.btn--quiet:hover { background: rgba(42, 42, 34, .42); }
 
 /* ---- Widget de reserva ---- */
 .booker {
@@ -769,11 +772,11 @@ h1, h2, h3, h4 {
   outline: none;
 }
 .btn--book {
-  background: #d7333f;
+  background: #c92b37;
   font-weight: 500;
   text-align: center;
 }
-.btn--book:hover { background: #bf2a35; }
+.btn--book:hover { background: #b12129; }
 
 /* ---- Marca en el footer ---- */
 .foot__brand { display: grid; gap: 10px; justify-items: start; }
